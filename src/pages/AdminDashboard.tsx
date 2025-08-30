@@ -62,7 +62,7 @@ const AdminDashboard = () => {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [showEventDialog, setShowEventDialog] = useState(false);
   const [showPhotoDialog, setShowPhotoDialog] = useState(false);
-  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [photoFiles, setPhotoFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -229,50 +229,56 @@ const AdminDashboard = () => {
     }
   };
 
-  const handlePhotoUpload = async (eventId: string, file: File, caption: string) => {
+  const handlePhotoUpload = async (eventId: string, files: File[], caption: string) => {
     try {
       setUploading(true);
       
-      // Upload file to Supabase Storage
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random()}.${fileExt}`;
-      const filePath = `${eventId}/${fileName}`;
+      const uploadPromises = files.map(async (file) => {
+        // Upload file to Supabase Storage
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random()}.${fileExt}`;
+        const filePath = `${eventId}/${fileName}`;
 
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from("event-photos")
-        .upload(filePath, file);
+        const { error: uploadError } = await supabase.storage
+          .from("event-photos")
+          .upload(filePath, file);
 
-      if (uploadError) throw uploadError;
+        if (uploadError) throw uploadError;
 
-      // Get public URL
-      const { data: { publicUrl } } = supabase.storage
-        .from("event-photos")
-        .getPublicUrl(filePath);
+        // Get public URL
+        const { data: { publicUrl } } = supabase.storage
+          .from("event-photos")
+          .getPublicUrl(filePath);
 
-      // Save photo record to database
-      const { error: dbError } = await supabase
-        .from("event_photos")
-        .insert([{
-          event_id: eventId,
-          photo_url: publicUrl,
-          caption: caption || null
-        }]);
+        // Save photo record to database
+        const { error: dbError } = await supabase
+          .from("event_photos")
+          .insert([{
+            event_id: eventId,
+            photo_url: publicUrl,
+            caption: caption || null
+          }]);
 
-      if (dbError) throw dbError;
+        if (dbError) throw dbError;
+        
+        return { success: true };
+      });
+
+      await Promise.all(uploadPromises);
       
       toast({
         title: "Success",
-        description: "Photo uploaded successfully!",
+        description: `${files.length} photo(s) uploaded successfully!`,
       });
       
       fetchPhotos();
       setShowPhotoDialog(false);
-      setPhotoFile(null);
+      setPhotoFiles([]);
     } catch (error) {
-      console.error("Error uploading photo:", error);
+      console.error("Error uploading photos:", error);
       toast({
         title: "Error",
-        description: "Failed to upload photo.",
+        description: "Failed to upload one or more photos.",
         variant: "destructive",
       });
     } finally {
@@ -468,8 +474,8 @@ const AdminDashboard = () => {
                     onUpload={handlePhotoUpload}
                     onCancel={() => setShowPhotoDialog(false)}
                     uploading={uploading}
-                    file={photoFile}
-                    onFileChange={setPhotoFile}
+                    files={photoFiles}
+                    onFilesChange={setPhotoFiles}
                   />
                 </DialogContent>
               </Dialog>
@@ -667,23 +673,35 @@ const PhotoUploadForm = ({
   onUpload,
   onCancel,
   uploading,
-  file,
-  onFileChange
+  files,
+  onFilesChange
 }: {
   events: Event[];
-  onUpload: (eventId: string, file: File, caption: string) => void;
+  onUpload: (eventId: string, files: File[], caption: string) => void;
   onCancel: () => void;
   uploading: boolean;
-  file: File | null;
-  onFileChange: (file: File | null) => void;
+  files: File[];
+  onFilesChange: (files: File[]) => void;
 }) => {
   const [selectedEventId, setSelectedEventId] = useState("");
   const [caption, setCaption] = useState("");
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFiles = Array.from(e.target.files);
+      onFilesChange([...files, ...newFiles]);
+    }
+  };
+
+  const removeFile = (index: number) => {
+    const newFiles = files.filter((_, i) => i !== index);
+    onFilesChange(newFiles);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file || !selectedEventId) return;
-    onUpload(selectedEventId, file, caption);
+    if (!files.length || !selectedEventId) return;
+    onUpload(selectedEventId, files, caption);
   };
 
   return (
@@ -705,15 +723,46 @@ const PhotoUploadForm = ({
       </div>
 
       <div>
-        <Label htmlFor="photo">Photo</Label>
+        <Label htmlFor="photos">Photos</Label>
         <Input
-          id="photo"
+          id="photos"
           type="file"
           accept="image/*"
-          onChange={(e) => onFileChange(e.target.files?.[0] || null)}
-          required
+          multiple
+          onChange={handleFileChange}
         />
+        <p className="text-xs text-muted-foreground mt-1">
+          Select multiple photos to upload at once
+        </p>
       </div>
+
+      {files.length > 0 && (
+        <div className="space-y-2">
+          <Label>Selected Photos ({files.length})</Label>
+          <div className="max-h-48 overflow-y-auto space-y-2 p-3 border rounded">
+            {files.map((file, index) => (
+              <div key={index} className="flex items-center justify-between bg-muted p-2 rounded">
+                <div className="flex items-center space-x-2">
+                  <Camera className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm truncate">{file.name}</span>
+                  <span className="text-xs text-muted-foreground">
+                    ({(file.size / 1024 / 1024).toFixed(2)} MB)
+                  </span>
+                </div>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => removeFile(index)}
+                  className="h-auto p-1"
+                >
+                  <Trash2 className="h-3 w-3" />
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div>
         <Label htmlFor="caption">Caption (Optional)</Label>
@@ -721,25 +770,28 @@ const PhotoUploadForm = ({
           id="caption"
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
-          placeholder="Add a caption for this photo..."
+          placeholder="Add a caption for these photos..."
           rows={2}
         />
+        <p className="text-xs text-muted-foreground mt-1">
+          This caption will be applied to all uploaded photos
+        </p>
       </div>
 
       <div className="flex justify-end space-x-2 pt-4">
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="submit" disabled={!file || !selectedEventId || uploading}>
+        <Button type="submit" disabled={!files.length || !selectedEventId || uploading}>
           {uploading ? (
             <>
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-              Uploading...
+              Uploading {files.length} photos...
             </>
           ) : (
             <>
               <Upload className="mr-2 h-4 w-4" />
-              Upload Photo
+              Upload {files.length} Photo{files.length !== 1 ? 's' : ''}
             </>
           )}
         </Button>
