@@ -17,15 +17,17 @@ import {
   Lock,
   Gift,
   Calendar,
-  DollarSign
+  Smartphone,
+  CheckCircle
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Donate = () => {
   const { toast } = useToast();
-  const [donationAmount, setDonationAmount] = useState<string>("50");
+  const [donationAmount, setDonationAmount] = useState<string>("500");
   const [customAmount, setCustomAmount] = useState<string>("");
   const [isRecurring, setIsRecurring] = useState<boolean>(false);
+  const [paymentMethod, setPaymentMethod] = useState<string>("payfast");
   const [donorInfo, setDonorInfo] = useState({
     firstName: "",
     lastName: "",
@@ -37,32 +39,32 @@ const Donate = () => {
     isAnonymous: false
   });
 
-  const presetAmounts = ["25", "50", "100", "250", "500"];
+  const presetAmounts = ["250", "500", "1000", "2500", "5000"];
 
   const impactAreas = [
     {
       icon: Utensils,
       title: "Food Security",
       description: "Provide meals and groceries to families facing food insecurity",
-      example: "$25 provides 50 meals through our food bank"
+      example: "R250 provides 50 meals through our food bank"
     },
     {
       icon: Home,
       title: "Housing Support", 
       description: "Help with rent assistance and home repairs for vulnerable families",
-      example: "$100 helps cover utility bills for a family in crisis"
+      example: "R1000 helps cover utility bills for a family in crisis"
     },
     {
       icon: GraduationCap,
       title: "Education Programs",
       description: "Support tutoring, mentorship, and educational resources for youth",
-      example: "$50 provides school supplies for 5 students"
+      example: "R500 provides school supplies for 5 students"
     },
     {
       icon: Users,
       title: "Community Programs",
       description: "Fund community events and support services that bring people together",
-      example: "$250 sponsors a community workshop or event"
+      example: "R2500 sponsors a community workshop or event"
     }
   ];
 
@@ -71,7 +73,7 @@ const Donate = () => {
     const amount = donationAmount === "custom" ? customAmount : donationAmount;
     toast({
       title: "Donation Processing...",
-      description: `Thank you for your ${isRecurring ? "monthly" : "one-time"} donation of $${amount}. You'll be redirected to our secure payment processor.`,
+      description: `Thank you for your ${isRecurring ? "monthly" : "one-time"} donation of R${amount}. You'll be redirected to ${paymentMethod === 'payfast' ? 'PayFast' : 'SnapScan'}.`,
     });
   };
 
@@ -81,11 +83,11 @@ const Donate = () => {
 
   const getImpactMessage = (amount: string) => {
     const num = parseInt(amount);
-    if (num >= 250) return "Your generosity can sponsor community workshops and provide comprehensive family support!";
-    if (num >= 100) return "Your donation can help with utility assistance and feed multiple families!";
-    if (num >= 50) return "Your contribution can provide school supplies and nutritious meals!";
-    if (num >= 25) return "Your gift can provide dozens of meals through our food bank!";
-    return "Every dollar makes a difference in someone's life!";
+    if (num >= 2500) return "Your generosity can sponsor community workshops and provide comprehensive family support!";
+    if (num >= 1000) return "Your donation can help with utility assistance and feed multiple families!";
+    if (num >= 500) return "Your contribution can provide school supplies and nutritious meals!";
+    if (num >= 250) return "Your gift can provide dozens of meals through our food bank!";
+    return "Every rand makes a difference in someone's life!";
   };
 
   return (
@@ -136,7 +138,7 @@ const Donate = () => {
                             htmlFor={amount}
                             className="flex items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                           >
-                            ${amount}
+                            R{amount}
                           </Label>
                         </div>
                       ))}
@@ -157,14 +159,14 @@ const Donate = () => {
                     
                     {donationAmount === "custom" && (
                       <div className="space-y-2">
-                        <Label htmlFor="customAmount">Enter Custom Amount</Label>
+                        <Label htmlFor="customAmount">Enter Custom Amount (ZAR)</Label>
                         <div className="relative">
-                          <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                          <span className="absolute left-3 top-3 text-sm text-muted-foreground">R</span>
                           <Input
                             id="customAmount"
                             type="number"
                             placeholder="0.00"
-                            className="pl-9"
+                            className="pl-8"
                             value={customAmount}
                             onChange={(e) => setCustomAmount(e.target.value)}
                             min="1"
@@ -191,6 +193,71 @@ const Donate = () => {
                     <Label htmlFor="recurring" className="text-sm">
                       Make this a monthly recurring donation
                     </Label>
+                  </div>
+
+                  <Separator />
+
+                  {/* Payment Method Selection */}
+                  <div className="space-y-4">
+                    <Label className="text-base font-semibold">Payment Method</Label>
+                    <RadioGroup 
+                      value={paymentMethod} 
+                      onValueChange={setPaymentMethod}
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                    >
+                      <div className="relative">
+                        <RadioGroupItem 
+                          value="payfast" 
+                          id="payfast" 
+                          className="peer sr-only" 
+                        />
+                        <Label
+                          htmlFor="payfast"
+                          className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-popover p-6 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+                        >
+                          <div className="w-16 h-10 bg-blue-600 rounded flex items-center justify-center mb-2">
+                            <span className="text-white font-bold text-sm">PayFast</span>
+                          </div>
+                          <span className="text-sm font-medium">PayFast</span>
+                          <span className="text-xs text-muted-foreground">Cards, EFT, Instant EFT</span>
+                        </Label>
+                      </div>
+                      <div className="relative">
+                        <RadioGroupItem 
+                          value="snapscan" 
+                          id="snapscan" 
+                          className="peer sr-only" 
+                        />
+                        <Label
+                          htmlFor="snapscan"
+                          className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-popover p-6 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+                        >
+                          <Smartphone className="w-8 h-8 text-green-600 mb-2" />
+                          <span className="text-sm font-medium">SnapScan</span>
+                          <span className="text-xs text-muted-foreground">QR Code Payment</span>
+                        </Label>
+                      </div>
+                    </RadioGroup>
+
+                    {/* Payment Method Logos */}
+                    <div className="bg-muted/30 rounded-lg p-4">
+                      <div className="flex items-center justify-center space-x-4 text-xs text-muted-foreground">
+                        <span>Accepted:</span>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-5 bg-blue-600 rounded flex items-center justify-center">
+                            <span className="text-white text-xs font-bold">VISA</span>
+                          </div>
+                          <div className="w-8 h-5 bg-red-600 rounded flex items-center justify-center">
+                            <span className="text-white text-xs font-bold">MC</span>
+                          </div>
+                          <div className="w-8 h-5 bg-green-600 rounded flex items-center justify-center">
+                            <span className="text-white text-xs font-bold">EFT</span>
+                          </div>
+                          <CheckCircle className="w-4 h-4 text-green-600" />
+                          <span className="text-xs">Instant EFT</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <Separator />
@@ -280,8 +347,8 @@ const Donate = () => {
                   </div>
 
                   <Button type="submit" size="lg" className="w-full" variant="cta">
-                    <CreditCard className="mr-2 h-5 w-5" />
-                    Donate ${donationAmount === "custom" ? customAmount || "0" : donationAmount}
+                    {paymentMethod === 'payfast' ? <CreditCard className="mr-2 h-5 w-5" /> : <Smartphone className="mr-2 h-5 w-5" />}
+                    Donate R{donationAmount === "custom" ? customAmount || "0" : donationAmount}
                     {isRecurring && "/month"}
                   </Button>
 
