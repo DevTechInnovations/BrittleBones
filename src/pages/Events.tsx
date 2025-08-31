@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,10 +17,51 @@ import {
   ExternalLink
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Event {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  time: string;
+  location: string;
+  category: string;
+  capacity: number;
+  attendees: number;
+  featured: boolean;
+}
 
 const Events = () => {
   const { toast } = useToast();
   const [registeredEvents, setRegisteredEvents] = useState<Set<string>>(new Set());
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("events")
+        .select("*")
+        .order("date", { ascending: true });
+
+      if (error) throw error;
+      setEvents(data || []);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+      toast({
+        title: "Error",
+        description: "Failed to load events.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleRSVP = (eventId: string, eventTitle: string) => {
     setRegisteredEvents(prev => new Set(prev.add(eventId)));
@@ -30,117 +71,22 @@ const Events = () => {
     });
   };
 
-  const upcomingEvents = [
-    {
-      id: "1",
-      title: "Community Food Drive",
-      description: "Help us collect food donations for local families in need. We'll be accepting non-perishable items, fresh produce, and monetary donations.",
-      date: "March 15, 2024",
-      time: "9:00 AM - 3:00 PM",
-      location: "Community Center - Main Hall",
-      category: "Community Service",
-      icon: Utensils,
-      attendees: 45,
-      capacity: 100,
-      featured: true
-    },
-    {
-      id: "2", 
-      title: "Volunteer Training Workshop",
-      description: "New to volunteering? Join our comprehensive training session to learn about our programs and how you can make the biggest impact.",
-      date: "March 22, 2024",
-      time: "10:00 AM - 2:00 PM",
-      location: "Main Office - Conference Room",
-      category: "Training",
-      icon: GraduationCap,
-      attendees: 23,
-      capacity: 30,
-      featured: false
-    },
-    {
-      id: "3",
-      title: "Annual Fundraising Gala",
-      description: "Join us for an evening of celebration and giving as we raise funds for our ongoing community programs. Dinner, entertainment, and silent auction included.",
-      date: "April 5, 2024", 
-      time: "6:00 PM - 10:00 PM",
-      location: "Grand Ballroom - Downtown Hotel",
-      category: "Fundraising",
-      icon: Heart,
-      attendees: 87,
-      capacity: 200,
-      featured: true
-    },
-    {
-      id: "4",
-      title: "Youth Mentorship Program Launch",
-      description: "Celebrate the launch of our new youth mentorship program connecting local students with community leaders and professionals.",
-      date: "April 12, 2024",
-      time: "4:00 PM - 6:00 PM", 
-      location: "Youth Center - Auditorium",
-      category: "Program Launch",
-      icon: Users,
-      attendees: 34,
-      capacity: 75,
-      featured: false
-    },
-    {
-      id: "5",
-      title: "Community Garden Project",
-      description: "Join us for a hands-on gardening day as we plant vegetables and flowers in our new community garden space.",
-      date: "April 20, 2024",
-      time: "8:00 AM - 12:00 PM",
-      location: "Community Garden - Maple Street",
-      category: "Community Service", 
-      icon: Gift,
-      attendees: 28,
-      capacity: 50,
-      featured: false
-    },
-    {
-      id: "6",
-      title: "Spring Charity Concert",
-      description: "Enjoy an evening of music featuring local artists performing to raise funds for our music therapy programs.",
-      date: "May 3, 2024",
-      time: "7:00 PM - 10:00 PM",
-      location: "City Park Amphitheater",
-      category: "Fundraising",
-      icon: Music,
-      attendees: 156,
-      capacity: 300,
-      featured: true
+  const getCategoryIcon = (category: string) => {
+    switch (category.toLowerCase()) {
+      case "community service": return Utensils;
+      case "training": return GraduationCap;
+      case "fundraising": return Heart;
+      case "program launch": return Users;
+      case "music": return Music;
+      default: return Gift;
     }
-  ];
+  };
 
-  const pastEvents = [
-    {
-      title: "Winter Clothing Drive",
-      date: "February 10, 2024",
-      description: "Successfully collected over 500 pieces of winter clothing for families in need.",
-      attendees: 78,
-      impact: "500+ items collected"
-    },
-    {
-      title: "Holiday Gift Wrapping", 
-      date: "December 20, 2023",
-      description: "Volunteers wrapped gifts for 150 families during our holiday assistance program.",
-      attendees: 45,
-      impact: "150 families served"
-    },
-    {
-      title: "Community Clean-Up Day",
-      date: "October 14, 2023", 
-      description: "Neighborhood beautification project removing litter and planting flowers in local parks.",
-      attendees: 92,
-      impact: "3 parks cleaned"
-    },
-    {
-      title: "Back-to-School Supply Drive",
-      date: "August 15, 2023",
-      description: "Collected school supplies for students from low-income families starting the new school year.",
-      attendees: 67,
-      impact: "200 students helped"
-    }
-  ];
+  // Filter events into upcoming and past based on current date
+  const currentDate = new Date();
+  const upcomingEvents = events.filter(event => new Date(event.date) >= currentDate);
+  const pastEventsList = events.filter(event => new Date(event.date) < currentDate);
+
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -151,6 +97,14 @@ const Events = () => {
       default: return "bg-muted text-muted-foreground";
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -179,58 +133,61 @@ const Events = () => {
               <div>
                 <h2 className="text-3xl font-bold text-foreground mb-8">Featured Events</h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                  {upcomingEvents.filter(event => event.featured).map((event) => (
-                    <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 border-l-4 border-l-accent">
-                      <CardHeader>
-                        <div className="flex items-start justify-between">
-                          <div className="flex items-start space-x-3">
-                            <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                              <event.icon className="h-6 w-6 text-accent" />
+                  {upcomingEvents.filter(event => event.featured).map((event) => {
+                    const IconComponent = getCategoryIcon(event.category);
+                    return (
+                      <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 border-l-4 border-l-accent">
+                        <CardHeader>
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-start space-x-3">
+                              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <IconComponent className="h-6 w-6 text-accent" />
+                              </div>
+                              <div>
+                                <CardTitle className="text-xl">{event.title}</CardTitle>
+                                <Badge className={getCategoryColor(event.category)}>{event.category}</Badge>
+                              </div>
                             </div>
-                            <div>
-                              <CardTitle className="text-xl">{event.title}</CardTitle>
-                              <Badge className={getCategoryColor(event.category)}>{event.category}</Badge>
+                          </div>
+                          <CardDescription className="mt-4 text-base">{event.description}</CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                            <div className="flex items-center space-x-2 text-muted-foreground">
+                              <Calendar className="h-4 w-4" />
+                              <span>{new Date(event.date).toLocaleDateString()}</span>
+                            </div>
+                            <div className="flex items-center space-x-2 text-muted-foreground">
+                              <Clock className="h-4 w-4" />
+                              <span>{event.time}</span>
+                            </div>
+                            <div className="flex items-center space-x-2 text-muted-foreground sm:col-span-2">
+                              <MapPin className="h-4 w-4" />
+                              <span>{event.location}</span>
+                            </div>
+                            <div className="flex items-center space-x-2 text-muted-foreground">
+                              <Users className="h-4 w-4" />
+                              <span>{event.attendees}/{event.capacity} registered</span>
                             </div>
                           </div>
-                        </div>
-                        <CardDescription className="mt-4 text-base">{event.description}</CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                          <div className="flex items-center space-x-2 text-muted-foreground">
-                            <Calendar className="h-4 w-4" />
-                            <span>{event.date}</span>
+                          <div className="w-full bg-muted rounded-full h-2">
+                            <div 
+                              className="bg-accent h-2 rounded-full transition-all duration-500"
+                              style={{ width: `${(event.attendees / event.capacity) * 100}%` }}
+                            />
                           </div>
-                          <div className="flex items-center space-x-2 text-muted-foreground">
-                            <Clock className="h-4 w-4" />
-                            <span>{event.time}</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-muted-foreground sm:col-span-2">
-                            <MapPin className="h-4 w-4" />
-                            <span>{event.location}</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-muted-foreground">
-                            <Users className="h-4 w-4" />
-                            <span>{event.attendees}/{event.capacity} registered</span>
-                          </div>
-                        </div>
-                        <div className="w-full bg-muted rounded-full h-2">
-                          <div 
-                            className="bg-accent h-2 rounded-full transition-all duration-500"
-                            style={{ width: `${(event.attendees / event.capacity) * 100}%` }}
-                          />
-                        </div>
-                        <Button 
-                          className="w-full" 
-                          variant={registeredEvents.has(event.id) ? "outline" : "default"}
-                          onClick={() => handleRSVP(event.id, event.title)}
-                          disabled={registeredEvents.has(event.id)}
-                        >
-                          {registeredEvents.has(event.id) ? "Registered ✓" : "Register Now"}
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
+                          <Button 
+                            className="w-full" 
+                            variant={registeredEvents.has(event.id) ? "outline" : "default"}
+                            onClick={() => handleRSVP(event.id, event.title)}
+                            disabled={registeredEvents.has(event.id)}
+                          >
+                            {registeredEvents.has(event.id) ? "Registered ✓" : "Register Now"}
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -238,47 +195,50 @@ const Events = () => {
               <div>
                 <h2 className="text-3xl font-bold text-foreground mb-8">All Upcoming Events</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {upcomingEvents.map((event) => (
-                    <Card key={event.id} className="hover:shadow-lg transition-all duration-300 h-full">
-                      <CardHeader>
-                        <div className="flex items-start justify-between mb-2">
-                          <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <event.icon className="h-5 w-5 text-primary" />
+                  {upcomingEvents.map((event) => {
+                    const IconComponent = getCategoryIcon(event.category);
+                    return (
+                      <Card key={event.id} className="hover:shadow-lg transition-all duration-300 h-full">
+                        <CardHeader>
+                          <div className="flex items-start justify-between mb-2">
+                            <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <IconComponent className="h-5 w-5 text-primary" />
+                            </div>
+                            <Badge className={getCategoryColor(event.category)} variant="outline">
+                              {event.category}
+                            </Badge>
                           </div>
-                          <Badge className={getCategoryColor(event.category)} variant="outline">
-                            {event.category}
-                          </Badge>
-                        </div>
-                        <CardTitle className="text-lg">{event.title}</CardTitle>
-                        <CardDescription>{event.description}</CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div className="space-y-2 text-sm">
-                          <div className="flex items-center space-x-2 text-muted-foreground">
-                            <Calendar className="h-4 w-4" />
-                            <span>{event.date}</span>
+                          <CardTitle className="text-lg">{event.title}</CardTitle>
+                          <CardDescription>{event.description}</CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="space-y-2 text-sm">
+                            <div className="flex items-center space-x-2 text-muted-foreground">
+                              <Calendar className="h-4 w-4" />
+                              <span>{new Date(event.date).toLocaleDateString()}</span>
+                            </div>
+                            <div className="flex items-center space-x-2 text-muted-foreground">
+                              <Clock className="h-4 w-4" />
+                              <span>{event.time}</span>
+                            </div>
+                            <div className="flex items-center space-x-2 text-muted-foreground">
+                              <Users className="h-4 w-4" />
+                              <span>{event.attendees}/{event.capacity}</span>
+                            </div>
                           </div>
-                          <div className="flex items-center space-x-2 text-muted-foreground">
-                            <Clock className="h-4 w-4" />
-                            <span>{event.time}</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-muted-foreground">
-                            <Users className="h-4 w-4" />
-                            <span>{event.attendees}/{event.capacity}</span>
-                          </div>
-                        </div>
-                        <Button 
-                          className="w-full" 
-                          variant={registeredEvents.has(event.id) ? "outline" : "outline"}
-                          size="sm"
-                          onClick={() => handleRSVP(event.id, event.title)}
-                          disabled={registeredEvents.has(event.id)}
-                        >
-                          {registeredEvents.has(event.id) ? "Registered ✓" : "Register"}
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
+                          <Button 
+                            className="w-full" 
+                            variant={registeredEvents.has(event.id) ? "outline" : "outline"}
+                            size="sm"
+                            onClick={() => handleRSVP(event.id, event.title)}
+                            disabled={registeredEvents.has(event.id)}
+                          >
+                            {registeredEvents.has(event.id) ? "Registered ✓" : "Register"}
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
               </div>
             </TabsContent>
@@ -286,35 +246,50 @@ const Events = () => {
             <TabsContent value="past" className="space-y-8">
               <div>
                 <h2 className="text-3xl font-bold text-foreground mb-8">Past Event Highlights</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {pastEvents.map((event, index) => (
-                    <Card key={index} className="hover:shadow-lg transition-all duration-300">
-                      <CardHeader>
-                        <div className="flex items-start space-x-3">
-                          <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
-                            <Camera className="h-6 w-6 text-muted-foreground" />
-                          </div>
-                          <div className="flex-1">
-                            <CardTitle>{event.title}</CardTitle>
-                            <p className="text-sm text-muted-foreground mb-2">{event.date}</p>
-                            <CardDescription>{event.description}</CardDescription>
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="flex justify-between items-center text-sm">
-                          <div className="flex items-center space-x-2 text-muted-foreground">
-                            <Users className="h-4 w-4" />
-                            <span>{event.attendees} attendees</span>
-                          </div>
-                          <Badge variant="outline" className="bg-success/10 text-success">
-                            {event.impact}
-                          </Badge>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                {pastEventsList.length === 0 ? (
+                  <Card>
+                    <CardContent className="text-center py-12">
+                      <Camera className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                      <h3 className="text-xl font-semibold text-muted-foreground mb-2">No Past Events Yet</h3>
+                      <p className="text-muted-foreground">
+                        Past events will appear here once they have concluded.
+                      </p>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {pastEventsList.map((event) => {
+                      const IconComponent = getCategoryIcon(event.category);
+                      return (
+                        <Card key={event.id} className="hover:shadow-lg transition-all duration-300">
+                          <CardHeader>
+                            <div className="flex items-start space-x-3">
+                              <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                                <IconComponent className="h-6 w-6 text-muted-foreground" />
+                              </div>
+                              <div className="flex-1">
+                                <CardTitle>{event.title}</CardTitle>
+                                <p className="text-sm text-muted-foreground mb-2">{new Date(event.date).toLocaleDateString()}</p>
+                                <CardDescription>{event.description}</CardDescription>
+                              </div>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex justify-between items-center text-sm">
+                              <div className="flex items-center space-x-2 text-muted-foreground">
+                                <Users className="h-4 w-4" />
+                                <span>{event.attendees} registered</span>
+                              </div>
+                              <Badge variant="outline" className="bg-success/10 text-success">
+                                {event.category}
+                              </Badge>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </TabsContent>
           </Tabs>
