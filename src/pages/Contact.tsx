@@ -137,7 +137,7 @@ const Contact = () => {
                       <div>
                         <h3 className="font-semibold text-foreground mb-1">Email Us</h3>
                         <p className="text-muted-foreground text-sm mb-2">Send us an email anytime</p>
-                        <p className="text-primary font-medium">info@communityhope.org</p>
+                        <p className="text-primary font-medium">info@brittlebones-sa.org.za</p>
                       </div>
                     </div>
                   </CardContent>
@@ -152,7 +152,7 @@ const Contact = () => {
                       <div>
                         <h3 className="font-semibold text-foreground mb-1">Call Us</h3>
                         <p className="text-muted-foreground text-sm mb-2">Monday - Friday, 9AM - 5PM</p>
-                        <p className="text-primary font-medium">(555) 123-4567</p>
+                        <p className="text-primary font-medium">064 651 0987</p>
                       </div>
                     </div>
                   </CardContent>
@@ -167,7 +167,7 @@ const Contact = () => {
                       <div>
                         <h3 className="font-semibold text-foreground mb-1">Visit Us</h3>
                         <p className="text-muted-foreground text-sm mb-2">Our main office</p>
-                        <p className="text-primary font-medium">123 Hope Street<br />Your City, State 12345</p>
+                        <p className="text-primary font-medium">Pinelands<br />Cape Town</p>
                       </div>
                     </div>
                   </CardContent>
@@ -229,7 +229,7 @@ const Contact = () => {
             <div className="text-center">
               <MapPin className="h-16 w-16 text-primary mx-auto mb-4" />
               <p className="text-lg font-semibold text-foreground">Interactive Map Coming Soon</p>
-              <p className="text-muted-foreground">123 Hope Street, Your City, State 12345</p>
+              <p className="text-muted-foreground">Pinelands, Cape Town</p>
             </div>
           </div>
         </div>

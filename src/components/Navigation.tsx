@@ -24,8 +24,9 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <Heart className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-primary">Brittle Bones</span>
+            {/* <Heart className="h-8 w-8 text-primary" /> */}
+            <img src="/src/assets/brittlebones-removebg-preview.png" alt="Brittle Bones Logo" className="h-16 w-16" />
+            <span className="text-xl font-bold text-black dark:text-white">Brittle Bones</span>
           </Link>
 
           {/* Desktop Navigation */}
