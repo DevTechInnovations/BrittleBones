@@ -110,8 +110,8 @@ const Donate = () => {
                     >
                       <span>Custom Amount</span>
                       {donationAmount === "custom" && (
-                        <div className="relative w-full mt-2">
-                          <span className="absolute left-3 top-2 text-gray-500">R</span>
+                        <div className="relative w-full mt-4">
+                          <span className="absolute left-4 top-3 text-gray-500">R</span>
                           <Input
                             type="number"
                             className="pl-7"
@@ -157,7 +157,7 @@ const Donate = () => {
                     />
                     <Label
                       htmlFor="payfast"
-                      className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-200 bg-white p-4 cursor-pointer hover:bg-primary hover:text-white transition peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-200 bg-white p-4 cursor-pointer hover:bg-primary hover:text-black transition peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10"
                     >
                       <CreditCard className="w-6 h-6 mb-1" />
                       PayFast
@@ -173,7 +173,7 @@ const Donate = () => {
                     />
                     <Label
                       htmlFor="snapscan"
-                      className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-200 bg-white p-4 cursor-pointer hover:bg-primary hover:text-white transition peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-200 bg-white p-4 cursor-pointer hover:bg-primary hover:text-black transition peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10"
                     >
                       <Smartphone className="w-6 h-6 mb-1" />
                       SnapScan
