@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Heart, Users, Calendar, Handshake, ArrowRight, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-community.jpg";
+import SuperheroImage from '@/assets/Superheros.png';
 
 const Home = () => {
   return (
@@ -12,7 +13,7 @@ const Home = () => {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url(${heroImage})`,
+            backgroundImage: `url(${SuperheroImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
