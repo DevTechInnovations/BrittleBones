@@ -17,20 +17,20 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 220 15% 15%;
 
-    /* Charity-focused color palette */
-    --primary: 195 85% 35%;  /* Deep teal */
+    /* Blue, Black & Yellow palette */
+    --primary: 220 90% 45%;   /* Strong blue */
     --primary-foreground: 0 0% 98%;
-    --primary-light: 195 85% 45%;
-    --primary-dark: 195 85% 25%;
+    --primary-light: 220 90% 55%;
+    --primary-dark: 220 90% 30%;
 
-    --secondary: 195 20% 95%;
-    --secondary-foreground: 195 85% 25%;
+    --secondary: 0 0% 10%;    /* Black */
+    --secondary-foreground: 0 0% 98%;
 
-    --accent: 25 95% 55%;  /* Warm orange for CTAs */
-    --accent-foreground: 0 0% 98%;
-    --accent-light: 25 95% 65%;
+    --accent: 50 100% 50%;    /* Bright yellow */
+    --accent-foreground: 0 0% 10%;
+    --accent-light: 50 100% 60%;
 
-    --success: 145 85% 35%;  /* Green for positive actions */
+    --success: 145 85% 35%;   /* Keep green for success */
     --success-foreground: 0 0% 98%;
 
     --muted: 220 15% 96%;
@@ -41,7 +41,7 @@ All colors MUST be HSL.
 
     --border: 220 15% 90%;
     --input: 220 15% 95%;
-    --ring: 195 85% 35%;
+    --ring: 220 90% 45%;
 
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 100%);
@@ -60,58 +60,52 @@ All colors MUST be HSL.
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-primary: 0 0% 10%; /* black sidebar */
     --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
+    --sidebar-accent: 220 90% 45%; /* blue accent */
+    --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 50 100% 50%; /* yellow ring */
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 10%;
+    --foreground: 0 0% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 220 90% 55%;   /* brighter blue in dark */
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 50 100% 50%; /* yellow secondary in dark */
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 50 100% 50%;
+    --accent-foreground: 0 0% 10%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 220 90% 55%;
+
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 220 90% 55%; /* blue in dark */
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 50 100% 50%;  /* yellow accent in dark */
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 220 90% 55%;
   }
 }
 
