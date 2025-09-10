@@ -47,7 +47,7 @@ const About = () => {
     {
       icon: Target,
       title: "Impact",
-      description: "We focus on sustainable solutions that address root causes and create measurable positive outcomes."
+      description: "Each project we run is built on community, compassion, and action. From celebrating milestones to creating pathways for advocacy, our work is powered by donations, volunteers, and partnerships that believe in building a more inclusive future for rare disease families."
     },
     {
       icon: Award,
@@ -87,15 +87,14 @@ const About = () => {
               </p>
               <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary" className="text-sm px-3 py-1">Founded 2014</Badge>
-                <Badge variant="secondary" className="text-sm px-3 py-1">Non-Profit 501(c)(3)</Badge>
+                <Badge variant="secondary" className="text-sm px-3 py-1">NPC 184-120 | Company Reg. 2025/546510/08</Badge>
                 <Badge variant="secondary" className="text-sm px-3 py-1">Community Focused</Badge>
               </div>
             </div>
             <div className="bg-gradient-to-br from-muted to-secondary p-8 rounded-lg">
               <h3 className="text-2xl font-bold text-foreground mb-4">Our Mission</h3>
               <p className="text-lg text-muted-foreground mb-6">
-                To empower communities by providing resources, support, and opportunities that 
-                enable individuals and families to build better lives and create positive change.
+                At Brittle Bones SA, our mission is to support, advocate, and empower individuals and families affected by Osteogenesis Imperfecta (OI) and other rare bone conditions across South Africa. Through our growing initiatives, we aim to raise awareness, provide practical support, and create opportunities for inclusion and empowerment.
               </p>
               <h3 className="text-2xl font-bold text-foreground mb-4">Our Vision</h3>
               <p className="text-lg text-muted-foreground">
