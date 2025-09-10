@@ -50,161 +50,260 @@ const Donate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/20">
       {/* Hero Section */}
-      <section className="bg-primary py-16 text-center text-white shadow-lg">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Make a Difference Today</h1>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto">
-          Your donation helps us change lives and support communities. Every contribution counts!
-        </p>
+      <section className="relative bg-primary py-20 text-center text-white overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"></div>
+        <div className="relative z-10">
+          <Heart className="mx-auto mb-6 w-16 h-16 text-white/90" />
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Make a Difference Today</h1>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-white/90">
+            Your donation helps us change lives and support communities. Every contribution counts and makes a real impact.
+          </p>
+        </div>
       </section>
 
-      {/* Donation Form */}
-      <div className="max-w-2xl mx-auto px-6 py-12">
-        <Card className="shadow-xl border-none">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-xl">
-              <Heart className="text-red-500" />
-              Donate Now
-            </CardTitle>
-            <CardDescription>
-              Choose an amount and payment method to make your secure donation.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleDonationSubmit} className="space-y-6">
-              {/* Donation Amount */}
-              <div>
-                <Label className="font-semibold text-lg">Donation Amount</Label>
-                <RadioGroup
-                  value={donationAmount}
-                  onValueChange={setDonationAmount}
-                  className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-3"
-                >
-                  {presetAmounts.map((amount) => (
-                    <div key={amount} className="relative">
-                      <RadioGroupItem
-                        value={amount}
-                        id={amount}
-                        className="peer sr-only"
-                      />
-                      <Label
-                        htmlFor={amount}
-                        className="flex items-center justify-center rounded-lg border-2 border-gray-200 bg-white p-4 cursor-pointer hover:bg-primary hover:text-white transition peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-white peer-data-[state=checked]:border-primary"
-                      >
-                        R{amount}
-                      </Label>
-                    </div>
-                  ))}
-
-                  {/* Custom Amount */}
-                  <div className="relative col-span-2 sm:col-span-3">
-                    <RadioGroupItem
-                      value="custom"
-                      id="custom"
-                      className="peer sr-only"
-                    />
-                    <Label
-                      htmlFor="custom"
-                      className="flex flex-col items-start rounded-lg border-2 border-gray-200 bg-white p-4 cursor-pointer hover:bg-primary hover:text-black transition peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10"
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Main Donation Form */}
+          <div className="lg:col-span-2">
+            <Card className="shadow-2xl border-0 bg-card/50 backdrop-blur-sm">
+              <CardHeader className="pb-6">
+                <CardTitle className="flex items-center gap-3 text-2xl">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <Heart className="text-primary w-6 h-6" />
+                  </div>
+                  Donate Now
+                </CardTitle>
+                <CardDescription className="text-base">
+                  Choose an amount and payment method to make your secure donation.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-8">
+                <form onSubmit={handleDonationSubmit} className="space-y-8">
+                  {/* Donation Amount */}
+                  <div className="space-y-4">
+                    <Label className="text-lg font-semibold text-foreground">Select Amount (ZAR)</Label>
+                    <RadioGroup
+                      value={donationAmount}
+                      onValueChange={setDonationAmount}
+                      className="grid grid-cols-2 sm:grid-cols-3 gap-3"
                     >
-                      <span>Custom Amount</span>
-                      {donationAmount === "custom" && (
-                        <div className="relative w-full mt-4">
-                          <span className="absolute left-4 top-3 text-gray-500">R</span>
-                          <Input
-                            type="number"
-                            className="pl-7"
-                            placeholder="Enter amount"
-                            value={customAmount}
-                            onChange={(e) => setCustomAmount(e.target.value)}
+                      {presetAmounts.map((amount) => (
+                        <div key={amount} className="relative">
+                          <RadioGroupItem
+                            value={amount}
+                            id={amount}
+                            className="peer sr-only"
                           />
+                          <Label
+                            htmlFor={amount}
+                            className="flex items-center justify-center rounded-xl border-2 border-border bg-background p-4 cursor-pointer hover:border-primary hover:bg-primary/5 transition-all duration-200 peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground peer-data-[state=checked]:border-primary font-semibold"
+                          >
+                            R{amount}
+                          </Label>
                         </div>
-                      )}
-                    </Label>
+                      ))}
+
+                      {/* Custom Amount */}
+                      <div className="relative col-span-2 sm:col-span-3">
+                        <RadioGroupItem
+                          value="custom"
+                          id="custom"
+                          className="peer sr-only"
+                        />
+                        <Label
+                          htmlFor="custom"
+                          className="flex flex-col items-start rounded-xl border-2 border-border bg-background p-4 cursor-pointer hover:border-primary hover:bg-primary/5 transition-all duration-200 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5"
+                        >
+                          <span className="font-semibold">Custom Amount</span>
+                          {donationAmount === "custom" && (
+                            <div className="relative w-full mt-3">
+                              <span className="absolute left-4 top-3 text-muted-foreground font-medium">R</span>
+                              <Input
+                                type="number"
+                                className="pl-8 h-12 text-base border-border"
+                                placeholder="Enter amount"
+                                value={customAmount}
+                                onChange={(e) => setCustomAmount(e.target.value)}
+                              />
+                            </div>
+                          )}
+                        </Label>
+                      </div>
+                    </RadioGroup>
                   </div>
-                </RadioGroup>
-              </div>
 
-              {/* Recurring Option */}
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  id="recurring"
-                  checked={isRecurring}
-                  onCheckedChange={(checked) => setIsRecurring(checked === true)}
-                />
-                <Label htmlFor="recurring" className="text-sm">
-                  Make this a monthly donation
-                </Label>
-              </div>
-
-              <Separator />
-
-              {/* Payment Method */}
-              <div>
-                <Label className="font-semibold text-lg">Payment Method</Label>
-                <RadioGroup
-                  value={paymentMethod}
-                  onValueChange={setPaymentMethod}
-                  className="grid grid-cols-2 gap-4 mt-3"
-                >
-                  {/* PayFast */}
-                  <div className="relative">
-                    <RadioGroupItem
-                      value="payfast"
-                      id="payfast"
-                      className="peer sr-only"
+                  {/* Recurring Option */}
+                  <div className="flex items-center gap-3 p-4 bg-muted/30 rounded-xl">
+                    <Checkbox
+                      id="recurring"
+                      checked={isRecurring}
+                      onCheckedChange={(checked) => setIsRecurring(checked === true)}
                     />
-                    <Label
-                      htmlFor="payfast"
-                      className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-200 bg-white p-4 cursor-pointer hover:bg-primary hover:text-black transition peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10"
-                    >
-                      <CreditCard className="w-6 h-6 mb-1" />
-                      PayFast
+                    <Label htmlFor="recurring" className="text-base font-medium">
+                      Make this a monthly recurring donation
                     </Label>
                   </div>
 
-                  {/* SnapScan */}
-                  <div className="relative">
-                    <RadioGroupItem
-                      value="snapscan"
-                      id="snapscan"
-                      className="peer sr-only"
-                    />
-                    <Label
-                      htmlFor="snapscan"
-                      className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-200 bg-white p-4 cursor-pointer hover:bg-primary hover:text-black transition peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10"
+                  {isRecurring && (
+                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                      <p className="text-sm text-blue-700">
+                        <strong>Note:</strong> Monthly donations are processed through PayFast only. SnapScan option will be disabled.
+                      </p>
+                    </div>
+                  )}
+
+                  <Separator className="my-6" />
+
+                  {/* Payment Method */}
+                  <div className="space-y-4">
+                    <Label className="text-lg font-semibold text-foreground">Payment Method</Label>
+                    <RadioGroup
+                      value={paymentMethod}
+                      onValueChange={setPaymentMethod}
+                      className="grid grid-cols-2 gap-4"
                     >
-                      <Smartphone className="w-6 h-6 mb-1" />
-                      SnapScan
-                    </Label>
+                      {/* PayFast */}
+                      <div className="relative">
+                        <RadioGroupItem
+                          value="payfast"
+                          id="payfast"
+                          className="peer sr-only"
+                        />
+                        <Label
+                          htmlFor="payfast"
+                          className="flex flex-col items-center justify-center rounded-xl border-2 border-border bg-background p-6 cursor-pointer hover:border-primary hover:bg-primary/5 transition-all duration-200 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 min-h-[120px]"
+                        >
+                          <CreditCard className="w-8 h-8 mb-2 text-primary" />
+                          <span className="font-semibold">PayFast</span>
+                          <span className="text-xs text-muted-foreground mt-1">Card & EFT</span>
+                        </Label>
+                      </div>
+
+                      {/* SnapScan */}
+                      <div className="relative">
+                        <RadioGroupItem
+                          value="snapscan"
+                          id="snapscan"
+                          className="peer sr-only"
+                          disabled={isRecurring}
+                        />
+                        <Label
+                          htmlFor="snapscan"
+                          className={`flex flex-col items-center justify-center rounded-xl border-2 border-border bg-background p-6 transition-all duration-200 min-h-[120px] ${
+                            isRecurring 
+                              ? 'opacity-50 cursor-not-allowed' 
+                              : 'cursor-pointer hover:border-primary hover:bg-primary/5 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5'
+                          }`}
+                        >
+                          <Smartphone className="w-8 h-8 mb-2 text-primary" />
+                          <span className="font-semibold">SnapScan</span>
+                          <span className="text-xs text-muted-foreground mt-1">QR Code</span>
+                          {isRecurring && (
+                            <span className="text-xs text-red-500 mt-1">Not available for monthly</span>
+                          )}
+                        </Label>
+                      </div>
+                    </RadioGroup>
                   </div>
-                </RadioGroup>
-              </div>
 
-              {/* Donate Button */}
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full rounded-lg text-lg font-semibold"
-              >
-                {paymentMethod === "snapscan" ? (
-                  <Smartphone className="mr-2 h-5 w-5" />
-                ) : (
-                  <CreditCard className="mr-2 h-5 w-5" />
-                )}
-                Donate R{donationAmount === "custom" ? customAmount || "0" : donationAmount}
-                {isRecurring && "/month"}
-              </Button>
+                  {/* Donate Button */}
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full h-14 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-200"
+                  >
+                    {paymentMethod === "snapscan" ? (
+                      <Smartphone className="mr-3 h-6 w-6" />
+                    ) : (
+                      <CreditCard className="mr-3 h-6 w-6" />
+                    )}
+                    Donate R{donationAmount === "custom" ? customAmount || "0" : donationAmount}
+                    {isRecurring && "/month"}
+                  </Button>
 
-              {/* Security Info */}
-              <div className="flex items-center justify-center gap-2 text-gray-500 text-sm mt-2">
-                <Lock className="h-4 w-4" />
-                Secure payment powered by SSL encryption
-              </div>
-            </form>
-          </CardContent>
-        </Card>
+                  {/* Security Info */}
+                  <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
+                    <Lock className="h-4 w-4" />
+                    <span>Secure payment powered by SSL encryption</span>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Banking Details Sidebar */}
+          <div className="space-y-6">
+            <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <div className="p-2 bg-green-100 rounded-lg">
+                    <CreditCard className="text-green-600 w-5 h-5" />
+                  </div>
+                  Direct Bank Transfer
+                </CardTitle>
+                <CardDescription>
+                  Transfer directly to our bank account
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-2 text-sm">
+                  <div>
+                    <span className="font-semibold text-muted-foreground">Bank:</span>
+                    <p className="font-medium">First National Bank (FNB)</p>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-muted-foreground">Account Name:</span>
+                    <p className="font-medium">Your Organization Name</p>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-muted-foreground">Account Number:</span>
+                    <p className="font-medium">62XXXXXXXX</p>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-muted-foreground">Branch Code:</span>
+                    <p className="font-medium">250655</p>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-muted-foreground">Reference:</span>
+                    <p className="font-medium">Donation + Your Name</p>
+                  </div>
+                </div>
+                <Separator />
+                <p className="text-xs text-muted-foreground">
+                  Please email proof of payment to donations@yourorg.org.za
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Impact Stats */}
+            <Card className="shadow-lg border-0 bg-gradient-to-br from-primary/5 to-primary/10">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <Heart className="text-primary w-5 h-5" />
+                  Your Impact
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span>R250</span>
+                    <span className="text-muted-foreground">Feeds 5 families</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>R500</span>
+                    <span className="text-muted-foreground">School supplies for 2 children</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>R1000</span>
+                    <span className="text-muted-foreground">Medical aid for 1 month</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

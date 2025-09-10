@@ -1,7 +1,6 @@
 
 import { Heart, Mail, Phone, MapPin, Facebook, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
-import { TikTok } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
