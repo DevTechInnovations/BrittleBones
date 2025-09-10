@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Logo and Mission */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-                <img src="/src/assets/brittlebones-removebg-preview.png" alt="Brittle Bones Logo" className="h-17 w-16" />
+                <img src="brittlebones-removebg-preview.png" alt="Brittle Bones Logo" className="h-17 w-16" />
               <span className="text-xl font-bold">Brittle Bones</span>
             </div>
             <p className="text-primary-foreground/80 mb-6 max-w-md">
