@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
-import { Heart, Smartphone, CreditCard, Lock } from "lucide-react";
+import { Heart, Smartphone, CreditCard, Lock, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Donate = () => {
@@ -21,10 +27,8 @@ const Donate = () => {
   const handleDonationSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Use custom amount if selected, otherwise preset amount
     const amount = donationAmount === "custom" ? customAmount : donationAmount;
 
-    // Validate entered amount
     if (!amount || parseFloat(amount) <= 0) {
       toast({
         title: "Invalid Amount",
@@ -34,18 +38,15 @@ const Donate = () => {
       return;
     }
 
-    // ✅ Always convert to cents for SnapScan
     const amountInCents = Math.round(Number(amount) * 100);
 
     if (paymentMethod === "snapscan") {
-      // Redirect to SnapScan with correct cents value
       window.location.href = `https://pos.snapscan.io/qr/6Cm8s6C8?amount=${amountInCents}`;
     } else {
       toast({
         title: "Redirecting to PayFast...",
         description: `Processing your donation of R${amount}`,
       });
-      // Add PayFast integration here if needed
     }
   };
 
@@ -54,17 +55,21 @@ const Donate = () => {
       {/* Hero Section */}
       <section className="relative bg-primary py-20 text-center text-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"></div>
-        <div className="relative z-10">
+        <div className="relative z-10 px-4">
           <Heart className="mx-auto mb-6 w-16 h-16 text-white/90" />
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Make a Difference Today</h1>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-white/90">
-            Your donation helps us change lives and support communities. Every contribution counts and makes a real impact.
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
+            Make a Difference Today
+          </h1>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-white/90">
+            Your donation helps us change lives and support communities. Every
+            contribution counts and makes a real impact.
           </p>
         </div>
       </section>
 
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        <div className="grid lg:grid-cols-3 gap-8">
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <div className="grid lg:grid-cols-3 gap-10">
           {/* Main Donation Form */}
           <div className="lg:col-span-2">
             <Card className="shadow-2xl border-0 bg-card/50 backdrop-blur-sm">
@@ -76,14 +81,17 @@ const Donate = () => {
                   Donate Now
                 </CardTitle>
                 <CardDescription className="text-base">
-                  Choose an amount and payment method to make your secure donation.
+                  Choose an amount and payment method to make your secure
+                  donation.
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-8">
                 <form onSubmit={handleDonationSubmit} className="space-y-8">
                   {/* Donation Amount */}
                   <div className="space-y-4">
-                    <Label className="text-lg font-semibold text-foreground">Select Amount (ZAR)</Label>
+                    <Label className="text-lg font-semibold text-foreground">
+                      Select Amount (ZAR)
+                    </Label>
                     <RadioGroup
                       value={donationAmount}
                       onValueChange={setDonationAmount}
@@ -119,13 +127,17 @@ const Donate = () => {
                           <span className="font-semibold">Custom Amount</span>
                           {donationAmount === "custom" && (
                             <div className="relative w-full mt-3">
-                              <span className="absolute left-4 top-3 text-muted-foreground font-medium">R</span>
+                              <span className="absolute left-4 top-3 text-muted-foreground font-medium">
+                                R
+                              </span>
                               <Input
                                 type="number"
                                 className="pl-8 h-12 text-base border-border"
                                 placeholder="Enter amount"
                                 value={customAmount}
-                                onChange={(e) => setCustomAmount(e.target.value)}
+                                onChange={(e) =>
+                                  setCustomAmount(e.target.value)
+                                }
                               />
                             </div>
                           )}
@@ -139,9 +151,14 @@ const Donate = () => {
                     <Checkbox
                       id="recurring"
                       checked={isRecurring}
-                      onCheckedChange={(checked) => setIsRecurring(checked === true)}
+                      onCheckedChange={(checked) =>
+                        setIsRecurring(checked === true)
+                      }
                     />
-                    <Label htmlFor="recurring" className="text-base font-medium">
+                    <Label
+                      htmlFor="recurring"
+                      className="text-base font-medium"
+                    >
                       Make this a monthly recurring donation
                     </Label>
                   </div>
@@ -149,7 +166,8 @@ const Donate = () => {
                   {isRecurring && (
                     <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
                       <p className="text-sm text-blue-700">
-                        <strong>Note:</strong> Monthly donations are processed through PayFast only. SnapScan option will be disabled.
+                        <strong>Note:</strong> Monthly donations are processed
+                        through PayFast only. SnapScan option will be disabled.
                       </p>
                     </div>
                   )}
@@ -158,7 +176,9 @@ const Donate = () => {
 
                   {/* Payment Method */}
                   <div className="space-y-4">
-                    <Label className="text-lg font-semibold text-foreground">Payment Method</Label>
+                    <Label className="text-lg font-semibold text-foreground">
+                      Payment Method
+                    </Label>
                     <RadioGroup
                       value={paymentMethod}
                       onValueChange={setPaymentMethod}
@@ -177,7 +197,9 @@ const Donate = () => {
                         >
                           <CreditCard className="w-8 h-8 mb-2 text-primary" />
                           <span className="font-semibold">PayFast</span>
-                          <span className="text-xs text-muted-foreground mt-1">Card & EFT</span>
+                          <span className="text-xs text-muted-foreground mt-1">
+                            Card & EFT
+                          </span>
                         </Label>
                       </div>
 
@@ -192,16 +214,20 @@ const Donate = () => {
                         <Label
                           htmlFor="snapscan"
                           className={`flex flex-col items-center justify-center rounded-xl border-2 border-border bg-background p-6 transition-all duration-200 min-h-[120px] ${
-                            isRecurring 
-                              ? 'opacity-50 cursor-not-allowed' 
-                              : 'cursor-pointer hover:border-primary hover:bg-primary/5 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5'
+                            isRecurring
+                              ? "opacity-50 cursor-not-allowed"
+                              : "cursor-pointer hover:border-primary hover:bg-primary/5 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5"
                           }`}
                         >
                           <Smartphone className="w-8 h-8 mb-2 text-primary" />
                           <span className="font-semibold">SnapScan</span>
-                          <span className="text-xs text-muted-foreground mt-1">QR Code</span>
+                          <span className="text-xs text-muted-foreground mt-1">
+                            QR Code
+                          </span>
                           {isRecurring && (
-                            <span className="text-xs text-red-500 mt-1">Not available for monthly</span>
+                            <span className="text-xs text-red-500 mt-1">
+                              Not available for monthly
+                            </span>
                           )}
                         </Label>
                       </div>
@@ -219,29 +245,36 @@ const Donate = () => {
                     ) : (
                       <CreditCard className="mr-3 h-6 w-6" />
                     )}
-                    Donate R{donationAmount === "custom" ? customAmount || "0" : donationAmount}
+                    Donate R
+                    {donationAmount === "custom"
+                      ? customAmount || "0"
+                      : donationAmount}
                     {isRecurring && "/month"}
                   </Button>
 
                   {/* Security Info */}
-                  <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
-                    <Lock className="h-4 w-4" />
-                    <span>Secure payment powered by SSL encryption</span>
-                  </div>
-                </form>
+                 
+
+          <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
+  <Lock className="h-4 w-4" />
+  <span>Secure payment powered by SSL encryption</span>
+  <img src="/src/assets/ssl2.png" alt="SSL Secure" className="h-12" width="auto" />
+</div>
+  </form>
               </CardContent>
             </Card>
           </div>
 
           {/* Banking Details Sidebar */}
           <div className="space-y-6">
+            {/* Banking Details */}
             <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <div className="p-2 bg-green-100 rounded-lg">
                     <CreditCard className="text-green-600 w-5 h-5" />
                   </div>
-                  Direct Bank Transfer
+                  Electronic Bank Transfer (EFT)
                 </CardTitle>
                 <CardDescription>
                   Transfer directly to our bank account
@@ -250,29 +283,39 @@ const Donate = () => {
               <CardContent className="space-y-3">
                 <div className="space-y-2 text-sm">
                   <div>
-                    <span className="font-semibold text-muted-foreground">Bank:</span>
-                    <p className="font-medium">First National Bank (FNB)</p>
+                    <span className="font-semibold text-muted-foreground">
+                      Bank:
+                    </span>
+                    <p className="font-medium">Capitec Business Bank</p>
                   </div>
                   <div>
-                    <span className="font-semibold text-muted-foreground">Account Name:</span>
-                    <p className="font-medium">Your Organization Name</p>
+                    <span className="font-semibold text-muted-foreground">
+                      Account Name:
+                    </span>
+                    <p className="font-medium">Brittle Bones</p>
                   </div>
                   <div>
-                    <span className="font-semibold text-muted-foreground">Account Number:</span>
-                    <p className="font-medium">62XXXXXXXX</p>
+                    <span className="font-semibold text-muted-foreground">
+                      Account Number:
+                    </span>
+                    <p className="font-medium">1053953216</p>
                   </div>
                   <div>
-                    <span className="font-semibold text-muted-foreground">Branch Code:</span>
-                    <p className="font-medium">250655</p>
+                    <span className="font-semibold text-muted-foreground">
+                      Branch Code:
+                    </span>
+                    <p className="font-medium">450105</p>
                   </div>
                   <div>
-                    <span className="font-semibold text-muted-foreground">Reference:</span>
+                    <span className="font-semibold text-muted-foreground">
+                      Reference:
+                    </span>
                     <p className="font-medium">Donation + Your Name</p>
                   </div>
                 </div>
                 <Separator />
                 <p className="text-xs text-muted-foreground">
-                  Please email proof of payment to donations@yourorg.org.za
+                  Please email proof of payment to info@brittlebones-sa.org.za
                 </p>
               </CardContent>
             </Card>
@@ -289,16 +332,63 @@ const Donate = () => {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span>R250</span>
-                    <span className="text-muted-foreground">Feeds 5 families</span>
+                    <span className="text-muted-foreground">
+                      Feeds 5 families
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>R500</span>
-                    <span className="text-muted-foreground">School supplies for 2 children</span>
+                    <span className="text-muted-foreground">
+                      School supplies for 2 children
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>R1000</span>
-                    <span className="text-muted-foreground">Medical aid for 1 month</span>
+                    <span className="text-muted-foreground">
+                      Medical aid for 1 month
+                    </span>
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Secure Payment Info */}
+            <Card className="shadow-lg border-0 bg-gradient-to-br from-green-50 to-green-100">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <Shield className="text-green-600 w-5 h-5" />
+                  Secure Payments
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-sm text-green-800 leading-relaxed">
+                  All payments made through this website are encrypted and
+                  processed securely. Your sensitive information is protected.
+                </p>
+
+                {/* Placeholder for payment logos */}
+                <div className="flex items-center justify-start gap-4 mt-3">
+                  {/* Example placeholders - replace with your actual images later */}
+                  <img
+                    src="/src/assets/Payfast logo.svg"
+                    alt="PayFast"
+                    className="h-7 w-auto"
+                  />
+                  <img
+                    src="src/assets/snapscanlogo.png"
+                    alt="SnapScan"
+                    className="h-12"
+                  />
+                  <img
+                    src="src/assets/visa3.png"
+                    alt="Visa"
+                    className="h-12"
+                  />
+                  <img
+                    src="src/assets/mastercard.png"
+                    alt="MasterCard"
+                    className="h-6"
+                  />
                 </div>
               </CardContent>
             </Card>
