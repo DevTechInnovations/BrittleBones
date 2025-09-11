@@ -1,58 +1,58 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Award, Users, Heart, Target, Calendar } from "lucide-react";
+import { Award, Users, Heart, Target } from "lucide-react";
 
 const About = () => {
   const teamMembers = [
     {
       name: "Sarah Johnson",
       role: "Executive Director",
-      description: "Leading community initiatives for over 10 years with passion for social change."
+      description: "A passionate leader with over 10 years of experience driving community-focused initiatives."
     },
     {
       name: "Michael Chen",
       role: "Program Manager", 
-      description: "Coordinating volunteer programs and ensuring maximum impact in our communities."
+      description: "Dedicated to coordinating impactful volunteer programs and maximizing community reach."
     },
     {
       name: "Emily Rodriguez",
       role: "Outreach Coordinator",
-      description: "Building partnerships and expanding our reach to serve more families in need."
+      description: "Building partnerships and expanding our network to support more families."
     },
     {
       name: "David Thompson",
       role: "Finance Director",
-      description: "Ensuring transparent financial management and sustainable growth."
+      description: "Committed to transparent financial stewardship and sustainable organizational growth."
     }
   ];
 
   const achievements = [
-    { number: "15,000+", label: "Lives Impacted" },
-    { number: "500+", label: "Volunteers" },
-    { number: "25", label: "Community Programs" },
-    { number: "10", label: "Years of Service" }
+    { number: "15,000+", label: "Lives touched with care and hope" },
+    { number: "500+", label: "Hearts that power our mission" },
+    { number: "25", label: "Initiatives that make a difference" },
+    { number: "10", label: "Years of dedication and impact" }
   ];
 
   const values = [
     {
       icon: Heart,
-      title: "Compassion",
-      description: "We approach every interaction with empathy and understanding, recognizing the dignity in every person we serve."
+      title: "Support and Community",
+      description: "Bringing families together through monthly meetups, online circles, and awareness drives."
     },
     {
       icon: Users,
-      title: "Community",
-      description: "We believe in the power of community to create lasting change and support one another through challenges."
+      title: "Give and Gain Gifting",
+      description: "Turning creativity into care through custom gift boxes and baked goods that directly fund meaningful projects."
     },
     {
       icon: Target,
-      title: "Impact",
-      description: "Each project we run is built on community, compassion, and action. From celebrating milestones to creating pathways for advocacy, our work is powered by donations, volunteers, and partnerships that believe in building a more inclusive future for rare disease families."
+      title: "Events and Fundraisers",
+      description: "Pop-up markets and community campaigns that inspire joy while supporting our mission."
     },
     {
       icon: Award,
-      title: "Excellence",
-      description: "We strive for excellence in everything we do, continuously improving our programs and services."
+      title: "Awareness Campaigns",
+      description: "Educating and inspiring through school visits, awareness days, and local partnerships."
     }
   ];
 
@@ -61,32 +61,28 @@ const About = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold text-primary-foreground mb-6">About Community Hope</h1>
+          <h1 className="text-5xl font-bold text-primary-foreground mb-6">About Brittle Bones</h1>
           <p className="text-xl text-primary-foreground/90">
-            Building bridges of hope and creating lasting positive change in communities worldwide since 2014.
+            At Brittle Bones SA, every child with Osteogenesis Imperfecta (brittle bone disease) is more than their condition—they are superheroes. 
+            Our mission is to uplift families, raise awareness, and build a community where children with fragile bones are celebrated and supported. 
+            Through heartfelt events, fundraisers, and strong partnerships, we bring hope, strength, and opportunities to those living with this rare condition. 
+            <strong> Together, we are Unbreakable in Spirit.</strong>
           </p>
         </div>
       </section>
 
-      {/* History & Mission */}
+      {/* Story Section */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold text-foreground mb-6">Our Story</h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Community Hope was founded in 2014 by a group of passionate individuals who believed that 
-                every person deserves access to basic necessities and opportunities for growth. What started 
-                as a small local initiative has grown into a comprehensive organization serving communities 
-                across multiple regions.
-              </p>
-              <p className="text-lg text-muted-foreground mb-6">
-                Our journey began when we witnessed the struggles faced by families in our own neighborhood. 
-                We realized that sustainable change requires more than temporary solutions – it requires 
-                building strong communities where people can support one another and thrive together.
+                Our journey began close to home, inspired by the challenges faced by families in our community. 
+                Real change doesn’t come from quick fixes—it comes from building strong, connected communities where families can lean on one another and thrive together.
               </p>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className="text-sm px-3 py-1">Founded 2014</Badge>
+                <Badge variant="secondary" className="text-sm px-3 py-1">Founded 2025</Badge>
                 <Badge variant="secondary" className="text-sm px-3 py-1">NPC 184-120 | Company Reg. 2025/546510/08</Badge>
                 <Badge variant="secondary" className="text-sm px-3 py-1">Community Focused</Badge>
               </div>
@@ -94,25 +90,55 @@ const About = () => {
             <div className="bg-gradient-to-br from-muted to-secondary p-8 rounded-lg">
               <h3 className="text-2xl font-bold text-foreground mb-4">Our Mission</h3>
               <p className="text-lg text-muted-foreground mb-6">
-                At Brittle Bones SA, our mission is to support, advocate, and empower individuals and families affected by Osteogenesis Imperfecta (OI) and other rare bone conditions across South Africa. Through our growing initiatives, we aim to raise awareness, provide practical support, and create opportunities for inclusion and empowerment.
+                We support, advocate for, and empower individuals and families affected by Osteogenesis Imperfecta (OI) and other rare bone conditions across South Africa. 
+                Through awareness, education, and practical support, we are building a foundation of inclusion, empowerment, and lasting change.
               </p>
               <h3 className="text-2xl font-bold text-foreground mb-4">Our Vision</h3>
               <p className="text-lg text-muted-foreground">
-                A world where every community has the resources and support needed to thrive, 
-                where compassion drives action, and where hope transforms lives.
+                We dream of a South Africa where every child and family facing OI has access to resources, compassion, and opportunities—a future where hope transforms lives and communities grow stronger together.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
+      {/* What We Do Section */}
+      <section className="py-20 bg-background">
+        <h2 className="text-4xl font-bold text-foreground mb-6 text-center">What We Do</h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6">
+          <Card>
+            <CardContent className="p-6">
+              <p className="text-muted-foreground">
+                We focus on creating real impact for children and families living with brittle bone disease. 
+                Our programs bring people together, raise awareness, and provide support where it matters most.
+              </p>
+              <ul className="list-disc list-inside mt-4 space-y-2 text-muted-foreground">
+                <li>Support programs for children and families</li>
+                <li>Awareness campaigns to educate and inspire</li>
+                <li>Fundraising initiatives that drive change</li>
+                <li>Community events that connect and uplift</li>
+              </ul>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="text-xl font-semibold mb-3">Success Stories</h3>
+              <p className="text-muted-foreground">
+                Every program has a story of resilience and hope. From children finding confidence to families discovering strength in community, 
+                these stories remind us why our work matters. Together, we turn challenges into victories.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Values Section */}
       <section className="py-20 bg-muted">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Our Values</h2>
+            <h2 className="text-4xl font-bold text-foreground mb-4">What We Stand For</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              These core principles guide every decision we make and every action we take.
+              These values guide every decision we make and every action we take.
             </p>
           </div>
           
@@ -132,13 +158,13 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Team Section */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Our Team</h2>
+            <h2 className="text-4xl font-bold text-foreground mb-4">The People Behind Our Work</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Meet the dedicated individuals working tirelessly to make a positive impact in our communities.
+              Meet the passionate individuals giving their time, energy, and love to make a difference.
             </p>
           </div>
           
@@ -159,13 +185,13 @@ const About = () => {
         </div>
       </section>
 
-      {/* Achievements */}
+      {/* Achievements Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-primary-foreground mb-4">Our Impact</h2>
+            <h2 className="text-4xl font-bold text-primary-foreground mb-4">The Difference We’ve Made</h2>
             <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">
-              Together, we've achieved remarkable milestones in our mission to create positive change.
+              Every milestone reflects the love, effort, and resilience of our community.
             </p>
           </div>
           
