@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Heart, Users, Calendar, Handshake, ArrowRight, Target } from "lucide-react";
+import { Heart, Users, Calendar, Handshake, ArrowRight, Target, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/IMG_2159.jpeg";
 import UpcomingEvents from "@/components/UpcomingEvents";
@@ -21,15 +21,15 @@ const Home = () => {
         >
           <div className="absolute inset-0 bg-primary/70"></div>
         </div>
-        
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Building Hope, <span className="text-accent">Together</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-primary-foreground/90">
-            Join our mission to create lasting positive change in communities worldwide. 
-            Every action, no matter how small, makes a difference. <span className="italic">Stronger together.</span>
-          </p>
+        <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-6">
+  <h1 className="text-5xl md:text-6xl font-bold mb-6">
+    Stronger <span className="text-accent">Together</span>
+  </h1>
+  <p className="text-xl md:text-2xl mb-8 text-primary-foreground/90 max-w-5xl mx-auto">
+    At <strong>Brittle Bones South Africa</strong>, we believe every child with Osteogenesis Imperfecta is a
+    superhero. Together, we are building awareness, offering support, and creating a community where they are
+    celebrated because we are <strong>Unbreakable in Spirit</strong>.
+  </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="cta" asChild>
               <Link to="/donate" className="text-lg px-8 py-6">
@@ -52,22 +52,20 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">Our Mission</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We believe in the power of community to transform lives and create lasting positive change. 
-              Through compassion, action, and hope, we work together to build a better tomorrow.
+            <p className="text-lg text-muted-foreground max-w-full mx-auto">
+              Supporting families with brittle bone disease through care, awareness, and community so no one faces OI alone.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="text-center hover:shadow-lg transition-all duration-300">
               <CardHeader>
                 <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <Heart className="h-8 w-8 text-primary" />
+                  <Shield className="h-8 w-8 text-primary" />
                 </div>
-                <CardTitle>Compassion</CardTitle>
+                <CardTitle>Support</CardTitle>
                 <CardDescription>
-                  We approach every challenge with empathy and understanding, 
-                  ensuring that dignity and respect are at the heart of everything we do.
+                  Helping families navigate daily challenges with OI through advice, resources, and emotional support.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -77,10 +75,9 @@ const Home = () => {
                 <div className="mx-auto w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
                   <Target className="h-8 w-8 text-accent" />
                 </div>
-                <CardTitle>Action</CardTitle>
+                <CardTitle>Awareness</CardTitle>
                 <CardDescription>
-                  We turn compassion into concrete action, implementing sustainable solutions 
-                  that address root causes and create lasting impact.
+                  Educating schools, medical professionals, and the public about Osteogenesis Imperfecta and its impact.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -92,16 +89,13 @@ const Home = () => {
                 </div>
                 <CardTitle>Community</CardTitle>
                 <CardDescription>
-                  We believe in the strength of community, bringing people together 
-                  to support one another and create positive change from within.
+                  Creating safe spaces — online and offline — where families can connect, share, and support each other.
                 </CardDescription>
               </CardHeader>
             </Card>
           </div>
         </div>
       </section>
-
-      
 
       {/* Event Highlights */}
       {/* <section className="py-20 bg-background">
