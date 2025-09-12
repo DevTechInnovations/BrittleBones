@@ -27,7 +27,7 @@ const Home = () => {
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-primary-foreground/90">
             Join our mission to create lasting positive change in communities worldwide. 
-            Every action, no matter how small, makes a difference.
+            Every action, no matter how small, makes a difference. <span className="italic">Stronger together.</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="cta" asChild>
