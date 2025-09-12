@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Clock, Send, Facebook, Twitter, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { SiTiktok } from "react-icons/si";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -191,29 +192,49 @@ const Contact = () => {
 
               {/* Social Links */}
               <Card>
-                <CardHeader>
-                  <CardTitle>Follow Us</CardTitle>
-                  <CardDescription>
-                    Stay connected and get updates on our latest initiatives and events.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex space-x-4">
-                    <Button variant="outline" size="icon" className="hover:text-primary">
-                      <Facebook className="h-5 w-5" />
-                    </Button>
-                    <Button variant="outline" size="icon" className="hover:text-primary">
-                      <Twitter className="h-5 w-5" />
-                    </Button>
-                    <Button variant="outline" size="icon" className="hover:text-primary">
-                      <Instagram className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+  <CardHeader>
+    <CardTitle>Follow Us</CardTitle>
+    <CardDescription>
+      Stay connected and get updates on our latest initiatives and events.
+    </CardDescription>
+  </CardHeader>
+  <CardContent>
+    <div className="flex space-x-4">
+      <a
+        href="https://www.facebook.com/brittlebonessa"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button variant="outline" size="icon" className="hover:text-primary">
+          <Facebook className="h-5 w-5" />
+        </Button>
+      </a>
+      <a
+        href="https://www.instagram.com/brittlebonessa2017"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button variant="outline" size="icon" className="hover:text-primary">
+          <Instagram className="h-5 w-5" />
+        </Button>
+      </a>
+     <a
+href="https://www.tiktok.com/@brittle.bones.sa"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button variant="outline" size="icon" className="hover:text-primary">
+    <SiTiktok className="h-5 w-5" />
+  </Button>
+</a>
+    </div>
+  </CardContent>
+</Card>
+
             </div>
           </div>
         </div>
+        
       </section>
 
       {/* Map Section Placeholder */}
