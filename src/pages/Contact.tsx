@@ -17,15 +17,42 @@ const Contact = () => {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically send the form data to your backend
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. We'll get back to you within 24 hours.",
-    });
-    setFormData({ name: "", email: "", subject: "", message: "" });
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   // Here you would typically send the form data to your backend
+  //   toast({
+  //     title: "Message Sent!",
+  //     description: "Thank you for reaching out. We'll get back to you within 24 hours.",
+  //   });
+  //   setFormData({ name: "", email: "", subject: "", message: "" });
+  // };
+
+
+
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true); // <-- start loading
+  try {
+   const response = await fetch("http://localhost:5000/send-Form-email", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
+});
+
+    const data = await response.json();
+    
+    if (data.success) {
+      toast({ title: "Message Sent!", description: data.message });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } else {
+      toast({ title: "Error", description: data.message, variant: "destructive" });
+    }
+  } catch (err) {
+    console.error(err);
+    toast({ title: "Error", description: "Something went wrong.", variant: "destructive" });
+  }
+};
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -109,10 +136,10 @@ const Contact = () => {
                         required
                       />
                     </div>
-                    <Button type="submit" className="w-full" size="lg">
-                      <Send className="mr-2 h-4 w-4" />
-                      Send Message
-                    </Button>
+    <Button type="submit" className="w-full" size="lg" disabled={loading}>
+  <Send className="mr-2 h-4 w-4" />
+  {loading ? "Sending..." : "Send Message"}
+</Button>
                   </form>
                 </CardContent>
               </Card>
