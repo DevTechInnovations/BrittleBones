@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Heart, Users, Calendar, Handshake, ArrowRight, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/IMG_2159.jpeg";
+import UpcomingEvents from "@/components/UpcomingEvents";
 // import heroImage from "@/assets/hero-community.jpg";
 
 const Home = () => {
@@ -100,8 +101,10 @@ const Home = () => {
         </div>
       </section>
 
+      
+
       {/* Event Highlights */}
-      <section className="py-20 bg-background">
+      {/* <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">Upcoming Events</h2>
@@ -175,7 +178,20 @@ const Home = () => {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
+<section className="py-20 bg-background">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold text-foreground mb-4">Upcoming Events</h2>
+      <p className="text-xl text-muted-foreground">
+        Join us in making a difference. Every event is an opportunity to connect and contribute.
+      </p>
+    </div>
+
+    <UpcomingEvents />
+  </div>
+</section>
+
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary-light">
@@ -206,5 +222,7 @@ const Home = () => {
     </div>
   );
 };
+
+
 
 export default Home;
