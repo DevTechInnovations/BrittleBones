@@ -1,6 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Award, Users, Heart, Target } from "lucide-react";
+import { Award, Users, Heart, Target, Calendar, Megaphone } from "lucide-react";
+import storyImg from "@/assets/IMG_2159.jpeg";
+import missionImg from "@/assets/IMG_2159.jpeg";
+import visionImg from "@/assets/IMG_2159.jpeg";
 
 const About = () => {
   const teamMembers = [
@@ -63,74 +66,102 @@ const About = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold text-primary-foreground mb-6">About Brittle Bones</h1>
           <p className="text-xl text-primary-foreground/90">
-            At Brittle Bones SA, every child with Osteogenesis Imperfecta (brittle bone disease) is more than their condition—they are superheroes. 
-            Our mission is to uplift families, raise awareness, and build a community where children with fragile bones are celebrated and supported. 
-            Through heartfelt events, fundraisers, and strong partnerships, we bring hope, strength, and opportunities to those living with this rare condition. 
-            <strong> Together, we are Unbreakable in Spirit.</strong>
+            At Brittle Bones SA, every child with Osteogenesis Imperfecta is a superhero. We support families, raise awareness, and build a community where they are celebrated and never alone. <strong>Together, we are Unbreakable in Spirit.</strong>
           </p>
         </div>
       </section>
 
       {/* Story Section */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-foreground mb-6">Our Story</h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                Our journey began close to home, inspired by the challenges faced by families in our community. 
-                Real change doesn’t come from quick fixes—it comes from building strong, connected communities where families can lean on one another and thrive together.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className="text-sm px-3 py-1">Founded 2025</Badge>
-                <Badge variant="secondary" className="text-sm px-3 py-1">NPC 184-120 | Company Reg. 2025/546510/08</Badge>
-                <Badge variant="secondary" className="text-sm px-3 py-1">Community Focused</Badge>
-              </div>
-            </div>
-            <div className="bg-gradient-to-br from-muted to-secondary p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-foreground mb-4">Our Mission</h3>
-              <p className="text-lg text-muted-foreground mb-6">
-                We support, advocate for, and empower individuals and families affected by Osteogenesis Imperfecta (OI) and other rare bone conditions across South Africa. 
-                Through awareness, education, and practical support, we are building a foundation of inclusion, empowerment, and lasting change.
-              </p>
-              <h3 className="text-2xl font-bold text-foreground mb-4">Our Vision</h3>
-              <p className="text-lg text-muted-foreground">
-                We dream of a South Africa where every child and family facing OI has access to resources, compassion, and opportunities—a future where hope transforms lives and communities grow stronger together.
-              </p>
-            </div>
-          </div>
+<section className="py-20 bg-background">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-4xl font-bold text-foreground text-center mb-4">About Us</h2>
+<p className="text-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
+  Supporting children and families with brittle bones through awareness, community, and care.
+</p>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* Story Card */}
+      <div className="bg-card rounded-xl shadow-lg overflow-hidden flex flex-col">
+        <img src={storyImg} alt="Our Story" className="w-full h-48 object-cover" />
+        <div className="p-6 flex-1 flex flex-col">
+          <h3 className="text-2xl font-bold mb-2 text-foreground">Our Story</h3>
+          <p className="text-muted-foreground flex-1">
+            Brittle Bones SA began close to home, inspired by families living with Osteogenesis Imperfecta.
+            We build communities where families can lean on each other and thrive together.
+          </p>
         </div>
-      </section>
+      </div>
+
+      {/* Mission Card */}
+      <div className="bg-card rounded-xl shadow-lg overflow-hidden flex flex-col">
+        <img src={missionImg} alt="Our Mission" className="w-full h-48 object-cover" />
+        <div className="p-6 flex-1 flex flex-col">
+          <h3 className="text-2xl font-bold mb-2 text-foreground">Our Mission</h3>
+          <p className="text-muted-foreground flex-1">
+            To support, advocate for, and empower families affected by brittle bone disease through
+            awareness, education, and practical support.
+          </p>
+        </div>
+      </div>
+
+      {/* Vision Card */}
+      <div className="bg-card rounded-xl shadow-lg overflow-hidden flex flex-col">
+        <img src={visionImg} alt="Our Vision" className="w-full h-48 object-cover" />
+        <div className="p-6 flex-1 flex flex-col">
+          <h3 className="text-2xl font-bold mb-2 text-foreground">Our Vision</h3>
+          <p className="text-muted-foreground flex-1">
+            A South Africa where every child with brittle bones has access to resources, compassion, and opportunity
+            a future where hope transforms lives and communities grow <strong>Stronger Together</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* What We Do Section */}
-      <section className="py-20 bg-background">
-        <h2 className="text-4xl font-bold text-foreground mb-6 text-center">What We Do</h2>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6">
-          <Card>
-            <CardContent className="p-6">
-              <p className="text-muted-foreground">
-                We focus on creating real impact for children and families living with brittle bone disease. 
-                Our programs bring people together, raise awareness, and provide support where it matters most.
-              </p>
-              <ul className="list-disc list-inside mt-4 space-y-2 text-muted-foreground">
-                <li>Support programs for children and families</li>
-                <li>Awareness campaigns to educate and inspire</li>
-                <li>Fundraising initiatives that drive change</li>
-                <li>Community events that connect and uplift</li>
-              </ul>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="text-xl font-semibold mb-3">Success Stories</h3>
-              <p className="text-muted-foreground">
-                Every program has a story of resilience and hope. From children finding confidence to families discovering strength in community, 
-                these stories remind us why our work matters. Together, we turn challenges into victories.
-              </p>
-            </CardContent>
-          </Card>
+<section className="py-20 bg-background">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+   <h2 className="text-4xl font-bold text-foreground text-center mb-4">What We Do</h2>
+<p className="text-lg text-muted-foreground text-center mb-12 max-w-full mx-auto">
+  Making a difference through programs, awareness, and community events.
+</p>
+
+    <div className="grid md:grid-cols-3 gap-8">
+      {/* Support Card */}
+      <div className="bg-card p-8 rounded-xl shadow-lg flex flex-col items-center space-y-4 hover:shadow-glow transition">
+        <div className="flex items-center justify-center w-14 h-14 bg-primary/10 rounded-full">
+          <Users className="text-primary w-7 h-7" />
         </div>
-      </section>
+        <h3 className="text-2xl font-semibold text-foreground">Support</h3>
+        <p className="text-muted-foreground text-center">
+          We provide programs and resources to help children and families living with brittle bone disease thrive.
+        </p>
+      </div>
+
+      {/* Awareness Card */}
+      <div className="bg-card p-8 rounded-xl shadow-lg flex flex-col items-center space-y-4 hover:shadow-glow transition">
+        <div className="flex items-center justify-center w-14 h-14 bg-accent/10 rounded-full">
+          <Megaphone className="text-accent w-7 h-7" />
+        </div>
+        <h3 className="text-2xl font-semibold text-foreground">Awareness</h3>
+        <p className="text-muted-foreground text-center">
+          We educate communities, schools, and medical professionals about Osteogenesis Imperfecta and rare bone conditions.
+        </p>
+      </div>
+
+      {/* Events Card */}
+      <div className="bg-card p-8 rounded-xl shadow-lg flex flex-col items-center space-y-4 hover:shadow-glow transition">
+        <div className="flex items-center justify-center w-14 h-14 bg-success/10 rounded-full">
+          <Calendar className="text-success w-7 h-7" />
+        </div>
+        <h3 className="text-2xl font-semibold text-foreground">Events</h3>
+        <p className="text-muted-foreground text-center">
+          From community gatherings to fundraising initiatives, our events connect families, donors, and volunteers.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Values Section */}
       <section className="py-20 bg-muted">

@@ -186,7 +186,6 @@ const Home = () => {
   </div>
 </section>
 
-
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary-light">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
@@ -216,7 +215,5 @@ const Home = () => {
     </div>
   );
 };
-
-
 
 export default Home;
