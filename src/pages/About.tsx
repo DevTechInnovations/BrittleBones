@@ -7,27 +7,24 @@ import visionImg from "@/assets/IMG_2159.jpeg";
 
 const About = () => {
   const teamMembers = [
-    {
-      name: "Sarah Johnson",
-      role: "Executive Director",
-      description: "A passionate leader with over 10 years of experience driving community-focused initiatives."
-    },
-    {
-      name: "Michael Chen",
-      role: "Program Manager", 
-      description: "Dedicated to coordinating impactful volunteer programs and maximizing community reach."
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Outreach Coordinator",
-      description: "Building partnerships and expanding our network to support more families."
-    },
-    {
-      name: "David Thompson",
-      role: "Finance Director",
-      description: "Committed to transparent financial stewardship and sustainable organizational growth."
-    }
-  ];
+{
+    name: "Rageema Livingstone",
+    role: "Founder and Chairperson",
+    description: "Leads Brittle Bones SA with years of experience in community development and advocacy.",
+  },
+  {
+    name: "Ishrat Casker",
+    role: "Treasurer",
+    description: "Manages finances with a focus on transparency and ensuring resources make the greatest impact.",
+  },
+  {
+    name: "Aziza Abrahams",
+    role: "Secretary",
+    description: "Keeps operations running smoothly and builds partnerships to strengthen community support.",
+  },
+];
+
+   
 
   const achievements = [
     { number: "15,000+", label: "Lives touched with care and hope" },
@@ -189,32 +186,38 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">The People Behind Our Work</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Meet the passionate individuals giving their time, energy, and love to make a difference.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
-                <CardHeader>
-                  <div className="mx-auto w-24 h-24 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mb-4">
-                    <Users className="h-12 w-12 text-primary-foreground" />
-                  </div>
-                  <CardTitle>{member.name}</CardTitle>
-                  <Badge variant="outline" className="mb-2">{member.role}</Badge>
-                  <CardDescription>{member.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
+
+    {/* Team Section */}
+    <section className="py-20 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-foreground mb-4">The People Behind Our Work</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Meet the passionate individuals giving their time, energy, and love to make a difference.
+          </p>
         </div>
-      </section>
+
+        <div className="flex flex-wrap justify-center gap-8">
+          {teamMembers.map((member, index) => (
+            <Card 
+              key={index} 
+              className="w-72 text-center hover:shadow-lg transition-all duration-300"
+            >
+              <CardHeader>
+                <div className="mx-auto w-24 h-24 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mb-4">
+                  <Users className="h-12 w-12 text-primary-foreground" />
+                </div>
+                <CardTitle>{member.name}</CardTitle>
+                <Badge variant="outline" className="mb-2 mx-auto">{member.role}</Badge>
+                <CardDescription>{member.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
 
       {/* Achievements Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary-light">
