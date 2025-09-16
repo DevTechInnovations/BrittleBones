@@ -1,0 +1,20 @@
+<form action="https://www.payfast.co.za/eng/process" method="post">
+  <!-- Merchant Details -->
+  <input type="hidden" name="merchant_id" value="31692783" />
+  <input type="hidden" name="merchant_key" value="dnammtpanjifi" />
+
+  <!-- Return URLs -->
+  <input type="hidden" name="return_url" value="https://yourdomain.co.za/success" />
+  <input type="hidden" name="cancel_url" value="https://yourdomain.co.za/cancel" />
+  <input type="hidden" name="notify_url" value="https://yourdomain.co.za/notify" />
+
+  <!-- Payment Info -->
+  <input type="hidden" name="amount" value="100.00" />
+  <input type="hidden" name="item_name" value="Test Donation" />
+
+  <!-- Donor Info -->
+  <input type="hidden" name="name_first" value="John" />
+  <input type="hidden" name="email_address" value="test@example.com" />
+
+  <button type="submit">Pay with PayFast</button>
+</form>

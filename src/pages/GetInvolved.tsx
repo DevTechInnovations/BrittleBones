@@ -122,7 +122,7 @@ const GetInvolved = () => {
             skills, or resources to share, we have opportunities that fit your lifestyle.
           </p>
           <Button size="lg" variant="cta" asChild>
-            <Link to="/contact">
+            <Link to="/volunteer">
               Start Your Journey <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
@@ -169,7 +169,7 @@ const GetInvolved = () => {
                     </div>
                   </div>
                   <Button className="w-full" variant="outline">
-                    Learn More
+                      <Link to="/volunteer">Learn More</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -210,51 +210,6 @@ const GetInvolved = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Membership */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-foreground mb-6">Become a Member</h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                Join our community of dedicated supporters and gain deeper involvement in our mission. 
-                Membership provides you with exclusive benefits while supporting our ongoing work.
-              </p>
-              <p className="text-lg text-muted-foreground mb-8">
-                Annual membership fee: <span className="font-semibold text-primary">$50 individual</span> | 
-                <span className="font-semibold text-primary"> $75 family</span>
-              </p>
-              <div className="space-y-2">
-                <Button size="lg" variant="cta" className="mr-4">
-                  Join Now
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link to="/contact">Learn More</Link>
-                </Button>
-              </div>
-            </div>
-            <Card className="h-fit">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Users className="h-5 w-5 text-primary" />
-                  <span>Membership Benefits</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {membershipBenefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-muted-foreground">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>

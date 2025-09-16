@@ -8,82 +8,118 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable CORS - allow requests from your frontend domains + local testing
-app.use(cors({
-  origin: [
-    "https://brittlebones.co.za",
-    "https://brittlebones.devtechinnovations.co.za",
-    "http://localhost:8080", // local frontend testing
-  ],
-  methods: ["GET", "POST"],
-}));
+// Enable CORS
+app.use(
+  cors({
+    origin: [
+      "https://brittlebones.co.za",
+      "https://brittlebones.devtechinnovations.co.za",
+      "http://localhost:8080",
+    ],
+    methods: ["GET", "POST"],
+  })
+);
 
 // Parse JSON bodies
 app.use(express.json());
 
 // Health check
-app.get("/", (req, res) => {
-  res.send("Server is running!");
-});
+app.get("/", (req, res) => res.send("Server is running!"));
 
-// ✅ EMAIL ROUTE - for contact / checkout form
+// EMAIL ROUTE
 app.post("/send-Form-email", async (req, res) => {
   const { name, email, subject, message } = req.body;
 
   if (!name || !email || !subject || !message) {
-    return res.status(400).json({ success: false, message: "All fields are required." });
+    return res.status(400).json({ success: false, message: "All fields required" });
   }
 
   try {
-    // Nodemailer transporter
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_ADMIN_HOST,
       port: Number(process.env.SMTP_ADMIN_PORT) || 587,
-      secure: process.env.SMTP_ADMIN_PORT == 465, // true for 465, false for other ports
+      secure: process.env.SMTP_ADMIN_PORT == 465,
       auth: {
         user: process.env.SMTP_ADMIN_USER,
         pass: process.env.SMTP_ADMIN_PASS,
       },
-      tls: {
-        rejectUnauthorized: false,
-      },
+      tls: { rejectUnauthorized: false },
     });
 
-    // Send email to admin
+    // Email to admin
     await transporter.sendMail({
       from: `"Contact Form" <${process.env.SMTP_ADMIN_USER}>`,
       to: process.env.ADMIN_RECEIVER_EMAIL,
       subject: `New Contact Form Submission: ${subject}`,
-      html: `
-        <h2>New Contact Submission</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Subject:</b> ${subject}</p>
-        <p><b>Message:</b> ${message}</p>
-      `,
+      html: `<h2>New Contact Submission</h2>
+             <p><b>Name:</b> ${name}</p>
+             <p><b>Email:</b> ${email}</p>
+             <p><b>Subject:</b> ${subject}</p>
+             <p><b>Message:</b> ${message}</p>`,
     });
 
-    // Optional: confirmation email to user
+    // Email to user
     await transporter.sendMail({
       from: `"Brittle Bones" <${process.env.SMTP_ADMIN_USER}>`,
       to: email,
       subject: "We've received your message!",
-      html: `
-        <h2>Hi ${name},</h2>
-        <p>Thank you for contacting us. We have received your message and will get back to you shortly.</p>
-        <p>Regards,<br/>Brittle Bones SA</p>
-        <a href="https://brittlebones-sa.org.za/"><img src="https://iili.io/KID11bj.png" alt="KID11bj.png" border="0" /></a>
-      `,
+      html: `<h2>Hi ${name},</h2>
+             <p>Thank you for contacting us. We’ll get back to you shortly.</p>
+             <p>Regards,<br/>Brittle Bones SA</p>
+             <a href="https://brittlebones-sa.org.za/"><img src="https://iili.io/KID11bj.png" alt="Brittle Bones Logo" /></a>`,
     });
 
-    return res.status(200).json({ success: true, message: "Email sent successfully!" });
-  } catch (error) {
-    console.error("Email Error:", error);
-    return res.status(500).json({ success: false, message: "Failed to send email." });
+    res.status(200).json({ success: true, message: "Email sent successfully!" });
+  } catch (err) {
+    console.error("Email Error:", err);
+    res.status(500).json({ success: false, message: "Failed to send email." });
+  }
+});
+
+// PAYFAST ROUTE
+const PAYFAST_URL = "https://www.payfast.co.za/eng/process";
+
+app.post("/donate", (req, res) => {
+  try {
+    const { amount, donorName, donorEmail, isRecurring } = req.body;
+
+    if (!amount || !donorName || !donorEmail) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const paymentData = {
+      merchant_id: process.env.PAYFAST_MERCHANT_ID,
+      merchant_key: process.env.PAYFAST_MERCHANT_KEY,
+      return_url: process.env.PAYFAST_RETURN_URL,
+      cancel_url: process.env.PAYFAST_CANCEL_URL,
+      notify_url: process.env.PAYFAST_NOTIFY_URL,
+      amount: parseFloat(amount).toFixed(2),
+      item_name: isRecurring ? "Monthly Donation" : "Once-off Donation",
+      name_first: donorName,
+      email_address: donorEmail,
+    };
+
+    if (isRecurring) {
+      paymentData.subscription_type = 1;
+      paymentData.billing_date = new Date().toISOString().split("T")[0];
+      paymentData.recurring_amount = paymentData.amount;
+      paymentData.frequency = 3; // monthly
+      paymentData.cycles = 0; // indefinite
+    }
+
+    // Build query string
+    const queryString = Object.entries(paymentData)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join("&");
+
+    const redirectUrl = `${PAYFAST_URL}?${queryString}`;
+
+    res.json({ url: redirectUrl });
+  } catch (err) {
+    console.error("PayFast Error:", err);
+    res.status(500).json({ error: "Failed to create PayFast URL" });
   }
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

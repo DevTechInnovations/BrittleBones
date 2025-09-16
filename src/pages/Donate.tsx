@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,19 +13,22 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
-import { Heart, Smartphone, CreditCard, Lock, Shield } from "lucide-react";
+import { Heart, Shield, Smartphone, CreditCard, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Donate = () => {
   const { toast } = useToast();
+
   const [donationAmount, setDonationAmount] = useState<string>("500");
   const [customAmount, setCustomAmount] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<string>("payfast");
   const [isRecurring, setIsRecurring] = useState<boolean>(false);
+  const [donorName, setDonorName] = useState<string>("");
+  const [donorEmail, setDonorEmail] = useState<string>("");
 
   const presetAmounts = ["250", "500", "1000", "2500", "5000"];
 
-  const handleDonationSubmit = (e: React.FormEvent) => {
+  const handleDonationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const amount = donationAmount === "custom" ? customAmount : donationAmount;
@@ -38,15 +42,51 @@ const Donate = () => {
       return;
     }
 
-    const amountInCents = Math.round(Number(amount) * 100);
+    if (!donorName || !donorEmail) {
+      toast({
+        title: "Missing Details",
+        description: "Please enter your name and email.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     if (paymentMethod === "snapscan") {
+      // SnapScan takes cents
+      const amountInCents = Math.round(Number(amount) * 100);
       window.location.href = `https://pos.snapscan.io/qr/6Cm8s6C8?amount=${amountInCents}`;
     } else {
-      toast({
-        title: "Redirecting to PayFast...",
-        description: `Processing your donation of R${amount}`,
-      });
+      try {
+        const res = await fetch("http://localhost:5000/donate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount,
+            donorName,
+            donorEmail,
+            isRecurring,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (data.url) {
+          window.location.href = data.url; // Redirect to PayFast
+        } else {
+          toast({
+            title: "Error",
+            description: "Unable to initiate PayFast payment.",
+            variant: "destructive",
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        toast({
+          title: "Server Error",
+          description: "Could not connect to the payment server.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -87,6 +127,28 @@ const Donate = () => {
               </CardHeader>
               <CardContent className="p-8">
                 <form onSubmit={handleDonationSubmit} className="space-y-8">
+                  {/* Donor Info */}
+                  <div className="space-y-4">
+                    <Label htmlFor="name">Your Name</Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="John Doe"
+                      value={donorName}
+                      onChange={(e) => setDonorName(e.target.value)}
+                      required
+                    />
+                    <Label htmlFor="email">Your Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={donorEmail}
+                      onChange={(e) => setDonorEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+
                   {/* Donation Amount */}
                   <div className="space-y-4">
                     <Label className="text-lg font-semibold text-foreground">
@@ -400,3 +462,5 @@ const Donate = () => {
 };
 
 export default Donate;
+
+
