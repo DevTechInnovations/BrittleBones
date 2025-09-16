@@ -119,12 +119,22 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
-          <p className="text-primary-foreground/60">
-  © {new Date().getFullYear()} Brittle Bones. All rights reserved. NPC 184-120 | Company Reg. 2025/546510/08
-</p>
-
-        </div>
+      <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
+  <p className="text-primary-foreground/60 mb-2">
+    © {new Date().getFullYear()} Brittle Bones. All rights reserved. NPC 184-120 | Company Reg. 2025/546510/08
+  </p>
+  <p className="text-primary-foreground/60 text-sm">
+    Powered by{" "}
+    <a 
+      href="https://devtechinnovations.co.za/" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="font-bold text-primary-foreground/80 hover:text-accent transition-colors"
+    >
+      DevTech Innovations
+    </a>
+  </p>
+</div>
       </div>
     </footer>
   );
