@@ -5,6 +5,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Camera, Calendar, Eye, Heart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
+
+
 
 interface Event {
   id: string;
@@ -299,10 +302,11 @@ const Gallery = () => {
             Every gathering is an opportunity to make new memories and lasting impact.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/events">
             <button className="px-8 py-3 bg-white/10 border border-white/30 text-white rounded-lg hover:bg-white hover:text-accent transition-colors duration-300 flex items-center justify-center">
               <Heart className="mr-2 h-5 w-5" />
               View Upcoming Events
-            </button>
+            </button></Link>
           </div>
         </div>
       </section>

@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Calendar, 
-  Clock, 
-  MapPin, 
-  Users, 
-  Heart, 
-  Utensils, 
+import {
+  Calendar,
+  Clock,
+  MapPin,
+  Users,
+  Heart,
+  Utensils,
   Music,
   GraduationCap,
   Gift,
@@ -113,7 +113,7 @@ const Events = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold text-primary-foreground mb-6">Events</h1>
           <p className="text-xl text-primary-foreground/90">
-            Join us for meaningful events that bring our community together and create positive change. 
+            Join us for meaningful events that bring our community together and create positive change.
             Every event is an opportunity to connect, contribute, and make a difference.
           </p>
         </div>
@@ -166,24 +166,24 @@ const Events = () => {
                               <span>{event.location}</span>
                             </div>
                             <div className="flex items-center space-x-2 text-muted-foreground">
-                              <Users className="h-4 w-4" />
-                              <span>{event.attendees}/{event.capacity} registered</span>
+                              {/* <Users className="h-4 w-4" />
+                              <span>{event.attendees}/{event.capacity} registered</span> */}
                             </div>
                           </div>
-                          <div className="w-full bg-muted rounded-full h-2">
-                            <div 
+                          {/* <div className="w-full bg-muted rounded-full h-2"> */}
+                            {/* <div
                               className="bg-accent h-2 rounded-full transition-all duration-500"
                               style={{ width: `${(event.attendees / event.capacity) * 100}%` }}
                             />
-                          </div>
-                          <Button 
-                            className="w-full" 
+                          </div> */}
+                          {/* <Button
+                            className="w-full"
                             variant={registeredEvents.has(event.id) ? "outline" : "default"}
                             onClick={() => handleRSVP(event.id, event.title)}
                             disabled={registeredEvents.has(event.id)}
                           >
                             {registeredEvents.has(event.id) ? "Registered ✓" : "Register Now"}
-                          </Button>
+                          </Button> */}
                         </CardContent>
                       </Card>
                     );
@@ -222,19 +222,19 @@ const Events = () => {
                               <span>{event.time}</span>
                             </div>
                             <div className="flex items-center space-x-2 text-muted-foreground">
-                              <Users className="h-4 w-4" />
-                              <span>{event.attendees}/{event.capacity}</span>
+                              {/* <Users className="h-4 w-4" />
+                              <span>{event.attendees}/{event.capacity}</span> */}
                             </div>
                           </div>
-                          <Button 
-                            className="w-full" 
+                          {/* <Button
+                            className="w-full"
                             variant={registeredEvents.has(event.id) ? "outline" : "outline"}
                             size="sm"
                             onClick={() => handleRSVP(event.id, event.title)}
                             disabled={registeredEvents.has(event.id)}
                           >
                             {registeredEvents.has(event.id) ? "Registered ✓" : "Register"}
-                          </Button>
+                          </Button> */}
                         </CardContent>
                       </Card>
                     );
@@ -277,8 +277,8 @@ const Events = () => {
                           <CardContent>
                             <div className="flex justify-between items-center text-sm">
                               <div className="flex items-center space-x-2 text-muted-foreground">
-                                <Users className="h-4 w-4" />
-                                <span>{event.attendees} registered</span>
+                                {/* <Users className="h-4 w-4" /> */}
+                                {/* <span>{event.attendees} registered</span> */}
                               </div>
                               <Badge variant="outline" className="bg-success/10 text-success">
                                 {event.category}
@@ -303,7 +303,7 @@ const Events = () => {
             Don't Miss Out!
           </h2>
           <p className="text-xl text-accent-foreground/90 mb-8">
-            Stay updated on all our upcoming events and be the first to register. 
+            Stay updated on all our upcoming events and be the first to register.
             Follow us on social media or contact us to get added to our event mailing list.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

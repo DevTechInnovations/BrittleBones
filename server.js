@@ -26,6 +26,7 @@ app.use(express.json());
 // Health check
 app.get("/", (req, res) => res.send("Server is running!"));
 
+
 // EMAIL ROUTE
 app.post("/send-Form-email", async (req, res) => {
   const { name, email, subject, message } = req.body;
@@ -73,6 +74,64 @@ app.post("/send-Form-email", async (req, res) => {
   } catch (err) {
     console.error("Email Error:", err);
     res.status(500).json({ success: false, message: "Failed to send email." });
+  }
+});
+
+// Volunteer Signup Route
+app.post("/volunteer-signup", async (req, res) => {
+  const { name, email, phone, role, availability, message } = req.body;
+
+  if (!name || !email || !phone || !role || !availability) {
+    return res.status(400).json({ success: false, message: "All required fields must be filled." });
+  }
+
+  try {
+    // Setup transporter
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_ADMIN_HOST,
+      port: Number(process.env.SMTP_ADMIN_PORT) || 587,
+      secure: process.env.SMTP_ADMIN_PORT == 465,
+      auth: {
+        user: process.env.SMTP_ADMIN_USER,
+        pass: process.env.SMTP_ADMIN_PASS,
+      },
+      tls: { rejectUnauthorized: false },
+    });
+
+    // Email to admin
+    await transporter.sendMail({
+      from: `"Volunteer Form" <${process.env.SMTP_ADMIN_USER}>`,
+      to: process.env.ADMIN_RECEIVER_EMAIL,
+      subject: `New Volunteer Signup: ${name}`,
+      html: `
+        <h2>New Volunteer Signup</h2>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Phone:</b> ${phone}</p>
+        <p><b>Role:</b> ${role}</p>
+        <p><b>Availability:</b> ${availability}</p>
+        <p><b>Message:</b> ${message || "N/A"}</p>
+      `,
+    });
+
+    // Confirmation email to volunteer
+    await transporter.sendMail({
+      from: `"Brittle Bones" <${process.env.SMTP_ADMIN_USER}>`,
+      to: email,
+      subject: "Volunteer Signup Confirmation",
+      html: `
+        <h2>Hi ${name},</h2>
+        <p>Thank you for signing up to volunteer with us as a <b>${role}</b>.</p>
+        <p>We’ve received your application and will contact you soon.</p>
+        <p>Best regards,<br/>Brittle Bones SA Team</p>
+        <a href="https://brittlebones-sa.org.za/"><img src="https://iili.io/KID11bj.png" alt="Brittle Bones Logo" /></a>
+      `,
+    });
+
+    return res.status(200).json({ success: true, message: "Volunteer form submitted successfully!" });
+  } catch (err) {
+    console.error("Volunteer Email Error:", err);
+    return res.status(500).json({ success: false, message: "Failed to send volunteer form." });
   }
 });
 
