@@ -7,24 +7,22 @@ import visionImg from "@/assets/IMG_2159.jpeg";
 
 const About = () => {
   const teamMembers = [
-{
-    name: "Rageema Livingstone",
-    role: "Founder and Chairperson",
-    description: "Leads Brittle Bones SA with years of experience in community development and advocacy.",
-  },
-  {
-    name: "Ishrat Casker",
-    role: "Treasurer",
-    description: "Manages finances with a focus on transparency and ensuring resources make the greatest impact.",
-  },
-  {
-    name: "Aziza Abrahams",
-    role: "Secretary",
-    description: "Keeps operations running smoothly and builds partnerships to strengthen community support.",
-  },
-];
-
-   
+    {
+      name: "Rageema Livingstone",
+      role: "Founder and Chairperson",
+      description: "Leads Brittle Bones SA with years of experience in community development and advocacy.",
+    },
+    {
+      name: "Ishrat Casker",
+      role: "Treasurer",
+      description: "Manages finances with a focus on transparency and ensuring resources make the greatest impact.",
+    },
+    {
+      name: "Aziza Abrahams",
+      role: "Secretary",
+      description: "Keeps operations running smoothly and builds partnerships to strengthen community support.",
+    },
+  ];
 
   const achievements = [
     { number: "15,000+", label: "Lives touched with care and hope" },
@@ -57,8 +55,8 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-white">
+      {/* Hero Section - Kept Gradient */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold text-primary-foreground mb-6">About Brittle Bones</h1>
@@ -68,66 +66,22 @@ const About = () => {
         </div>
       </section>
 
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
+
       {/* Story Section */}
-<section className="py-20 bg-background">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-4xl font-bold text-foreground text-center mb-4">About Us</h2>
-<p className="text-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-  Supporting children and families with brittle bones through awareness, community, and care.
-</p>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {/* Story Card */}
-      <div className="bg-card rounded-xl shadow-lg overflow-hidden flex flex-col">
-        <img src={storyImg} alt="Our Story" className="w-full h-48 object-cover" />
-        <div className="p-6 flex-1 flex flex-col">
-          <h3 className="text-2xl font-bold mb-2 text-foreground">Our Story</h3>
-          <p className="text-muted-foreground flex-1">
-            Brittle Bones SA began close to home, inspired by families living with Osteogenesis Imperfecta.
-            We build communities where families can lean on each other and thrive together.
-          </p>
-        </div>
-      </div>
-
-      {/* Mission Card */}
-      <div className="bg-card rounded-xl shadow-lg overflow-hidden flex flex-col">
-        <img src={missionImg} alt="Our Mission" className="w-full h-48 object-cover" />
-        <div className="p-6 flex-1 flex flex-col">
-          <h3 className="text-2xl font-bold mb-2 text-foreground">Our Mission</h3>
-          <p className="text-muted-foreground flex-1">
-            To support, advocate for, and empower families affected by brittle bone disease through
-            awareness, education, and practical support.
-          </p>
-        </div>
-      </div>
-
-      {/* Vision Card */}
-      <div className="bg-card rounded-xl shadow-lg overflow-hidden flex flex-col">
-        <img src={visionImg} alt="Our Vision" className="w-full h-48 object-cover" />
-        <div className="p-6 flex-1 flex flex-col">
-          <h3 className="text-2xl font-bold mb-2 text-foreground">Our Vision</h3>
-          <p className="text-muted-foreground flex-1">
-            A South Africa where every child with brittle bones has access to resources, compassion, and opportunity
-            a future where hope transforms lives and communities grow <strong>Stronger Together</strong>.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* What We Do Section */}
-<section className="py-20 bg-background">
+     <section className="py-20 bg-white">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-   <h2 className="text-4xl font-bold text-foreground text-center mb-4">What We Do</h2>
-<p className="text-lg text-muted-foreground text-center mb-12 max-w-full mx-auto">
-  Making a difference through programs, awareness, and community events.
-</p>
+    <h2 className="text-4xl font-bold text-foreground text-center mb-4">What We Do</h2>
+    <p className="text-lg text-muted-foreground text-center mb-12 max-w-full mx-auto">
+      Making a difference through programs, awareness, and community events.
+    </p>
 
     <div className="grid md:grid-cols-3 gap-8">
       {/* Support Card */}
-      <div className="bg-card p-8 rounded-xl shadow-lg flex flex-col items-center space-y-4 hover:shadow-glow transition">
-        <div className="flex items-center justify-center w-14 h-14 bg-primary/10 rounded-full">
-          <Users className="text-primary w-7 h-7" />
+      <div className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center space-y-4 border border-gray-200">
+        <div className="flex items-center justify-center w-14 h-14 bg-yellow-100 rounded-full">
+          <Users className="text-yellow-500 w-7 h-7" />
         </div>
         <h3 className="text-2xl font-semibold text-foreground">Support</h3>
         <p className="text-muted-foreground text-center">
@@ -136,9 +90,9 @@ const About = () => {
       </div>
 
       {/* Awareness Card */}
-      <div className="bg-card p-8 rounded-xl shadow-lg flex flex-col items-center space-y-4 hover:shadow-glow transition">
-        <div className="flex items-center justify-center w-14 h-14 bg-accent/10 rounded-full">
-          <Megaphone className="text-accent w-7 h-7" />
+      <div className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center space-y-4 border border-gray-200">
+        <div className="flex items-center justify-center w-14 h-14 bg-yellow-100 rounded-full">
+          <Megaphone className="text-yellow-500 w-7 h-7" />
         </div>
         <h3 className="text-2xl font-semibold text-foreground">Awareness</h3>
         <p className="text-muted-foreground text-center">
@@ -147,9 +101,9 @@ const About = () => {
       </div>
 
       {/* Events Card */}
-      <div className="bg-card p-8 rounded-xl shadow-lg flex flex-col items-center space-y-4 hover:shadow-glow transition">
-        <div className="flex items-center justify-center w-14 h-14 bg-success/10 rounded-full">
-          <Calendar className="text-success w-7 h-7" />
+      <div className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center space-y-4 border border-gray-200">
+        <div className="flex items-center justify-center w-14 h-14 bg-yellow-100 rounded-full">
+          <Calendar className="text-yellow-500 w-7 h-7" />
         </div>
         <h3 className="text-2xl font-semibold text-foreground">Events</h3>
         <p className="text-muted-foreground text-center">
@@ -160,8 +114,11 @@ const About = () => {
   </div>
 </section>
 
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
+
       {/* Values Section */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">What We Stand For</h2>
@@ -172,7 +129,7 @@ const About = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
+              <Card key={index} className="text-center hover:shadow-lg transition-all duration-300 bg-white">
                 <CardHeader>
                   <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                     <value.icon className="h-8 w-8 text-primary" />
@@ -186,44 +143,47 @@ const About = () => {
         </div>
       </section>
 
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
 
-    {/* Team Section */}
-    <section className="py-20 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">The People Behind Our Work</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Meet the passionate individuals giving their time, energy, and love to make a difference.
-          </p>
+      {/* Team Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-foreground mb-4">The People Behind Our Work</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Meet the passionate individuals giving their time, energy, and love to make a difference.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-8">
+            {teamMembers.map((member, index) => (
+              <Card 
+                key={index} 
+                className="w-72 text-center hover:shadow-lg transition-all duration-300 bg-white"
+              >
+                <CardHeader>
+                  <div className="mx-auto w-24 h-24 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mb-4">
+                    <Users className="h-12 w-12 text-primary-foreground" />
+                  </div>
+                  <CardTitle>{member.name}</CardTitle>
+                  <Badge variant="outline" className="mb-2 mx-auto">{member.role}</Badge>
+                  <CardDescription>{member.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="flex flex-wrap justify-center gap-8">
-          {teamMembers.map((member, index) => (
-            <Card 
-              key={index} 
-              className="w-72 text-center hover:shadow-lg transition-all duration-300"
-            >
-              <CardHeader>
-                <div className="mx-auto w-24 h-24 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mb-4">
-                  <Users className="h-12 w-12 text-primary-foreground" />
-                </div>
-                <CardTitle>{member.name}</CardTitle>
-                <Badge variant="outline" className="mb-2 mx-auto">{member.role}</Badge>
-                <CardDescription>{member.description}</CardDescription>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
 
-
-
-      {/* Achievements Section */}
+      {/* Achievements Section - Kept Gradient */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-primary-foreground mb-4">The Difference We’ve Made</h2>
+            <h2 className="text-4xl font-bold text-primary-foreground mb-4">The Difference We've Made</h2>
             <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">
               Every milestone reflects the love, effort, and resilience of our community.
             </p>

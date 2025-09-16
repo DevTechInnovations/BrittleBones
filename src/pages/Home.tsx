@@ -4,13 +4,12 @@ import { Heart, Users, Calendar, Handshake, ArrowRight, Target, Shield } from "l
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/IMG_2159.jpeg";
 import UpcomingEvents from "@/components/UpcomingEvents";
-// import heroImage from "@/assets/hero-community.jpg";
 
 const Home = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white">
         <div 
           className="absolute inset-0 z-0"
           style={{
@@ -22,14 +21,14 @@ const Home = () => {
           <div className="absolute inset-0 bg-primary/70"></div>
         </div>
         <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-6">
-  <h1 className="text-5xl md:text-6xl font-bold mb-6">
-    Stronger <span className="text-accent">Together</span>
-  </h1>
-  <p className="text-xl md:text-2xl mb-8 text-primary-foreground/90 max-w-5xl mx-auto">
-    At <strong>Brittle Bones South Africa</strong>, we believe every child with Osteogenesis Imperfecta is a
-    superhero. Together, we are building awareness, offering support, and creating a community where they are
-    celebrated because we are <strong>Unbreakable in Spirit</strong>.
-  </p>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            Stronger <span className="text-accent">Together</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 text-primary-foreground/90 max-w-5xl mx-auto">
+            At <strong>Brittle Bones South Africa</strong>, we believe every child with Osteogenesis Imperfecta is a
+            superhero. Together, we are building awareness, offering support, and creating a community where they are
+            celebrated because we are <strong>Unbreakable in Spirit</strong>.
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="cta" asChild>
               <Link to="/donate" className="text-lg px-8 py-6">
@@ -47,58 +46,64 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
+
       {/* Mission Overview */}
-      <section className="py-20 bg-gradient-to-b from-background to-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Our Mission</h2>
-            <p className="text-lg text-muted-foreground max-w-full mx-auto">
-              Supporting families with brittle bone disease through care, awareness, and community so no one faces OI alone.
-            </p>
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold text-foreground mb-4">Our Mission</h2>
+      <p className="text-lg text-muted-foreground max-w-full mx-auto">
+        Supporting families with brittle bone disease through care, awareness, and community so no one faces OI alone.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <Card className="text-center hover:shadow-lg transition-all duration-300">
+        <CardHeader>
+          <div className="mx-auto w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+            <Shield className="h-8 w-8 text-yellow-500" />
           </div>
+          <CardTitle>Support</CardTitle>
+          <CardDescription>
+            Helping families navigate daily challenges with OI through advice, resources, and emotional support.
+          </CardDescription>
+        </CardHeader>
+      </Card>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="text-center hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <Shield className="h-8 w-8 text-primary" />
-                </div>
-                <CardTitle>Support</CardTitle>
-                <CardDescription>
-                  Helping families navigate daily challenges with OI through advice, resources, and emotional support.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
-                  <Target className="h-8 w-8 text-accent" />
-                </div>
-                <CardTitle>Awareness</CardTitle>
-                <CardDescription>
-                  Educating schools, medical professionals, and the public about Osteogenesis Imperfecta and its impact.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mb-4">
-                  <Users className="h-8 w-8 text-success" />
-                </div>
-                <CardTitle>Community</CardTitle>
-                <CardDescription>
-                  Creating safe spaces — online and offline — where families can connect, share, and support each other.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+      <Card className="text-center hover:shadow-lg transition-all duration-300">
+        <CardHeader>
+          <div className="mx-auto w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+            <Target className="h-8 w-8 text-yellow-500" />
           </div>
-        </div>
-      </section>
+          <CardTitle>Awareness</CardTitle>
+          <CardDescription>
+            Educating schools, medical professionals, and the public about Osteogenesis Imperfecta and its impact.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+
+      <Card className="text-center hover:shadow-lg transition-all duration-300">
+        <CardHeader>
+          <div className="mx-auto w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+            <Users className="h-8 w-8 text-yellow-500" />
+          </div>
+          <CardTitle>Community</CardTitle>
+          <CardDescription>
+            Creating safe spaces — online and offline — where families can connect, share, and support each other.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </div>
+  </div>
+</section>
+
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
 
       {/* Event Highlights */}
-      {/* <section className="py-20 bg-background">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">Upcoming Events</h2>
@@ -106,87 +111,15 @@ const Home = () => {
               Join us in making a difference. Every event is an opportunity to connect and contribute.
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-center space-x-2 text-primary mb-2">
-                  <Calendar className="h-5 w-5" />
-                  <span className="text-sm font-medium">March 15, 2024</span>
-                </div>
-                <CardTitle>Community Food Drive</CardTitle>
-                <CardDescription>
-                  Help us collect food donations for local families in need. 
-                  Every contribution makes a difference.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" asChild className="w-full">
-                  <Link to="/events">
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
 
-            <Card className="hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-center space-x-2 text-primary mb-2">
-                  <Calendar className="h-5 w-5" />
-                  <span className="text-sm font-medium">March 22, 2024</span>
-                </div>
-                <CardTitle>Volunteer Training Workshop</CardTitle>
-                <CardDescription>
-                  New to volunteering? Join our comprehensive training session 
-                  to learn how you can make the biggest impact.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" asChild className="w-full">
-                  <Link to="/events">
-                    Register Now <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-center space-x-2 text-primary mb-2">
-                  <Calendar className="h-5 w-5" />
-                  <span className="text-sm font-medium">April 5, 2024</span>
-                </div>
-                <CardTitle>Annual Fundraising Gala</CardTitle>
-                <CardDescription>
-                  Join us for an evening of celebration and giving as we raise funds 
-                  for our ongoing community programs.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" asChild className="w-full">
-                  <Link to="/events">
-                    Get Tickets <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+          <UpcomingEvents />
         </div>
-      </section> */}
-<section className="py-20 bg-background">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-foreground mb-4">Upcoming Events</h2>
-      <p className="text-xl text-muted-foreground">
-        Join us in making a difference. Every event is an opportunity to connect and contribute.
-      </p>
-    </div>
+      </section>
 
-    <UpcomingEvents />
-  </div>
-</section>
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
 
-      {/* CTA Section */}
+      {/* CTA Section - Kept Blue */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary-light">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-primary-foreground mb-6">

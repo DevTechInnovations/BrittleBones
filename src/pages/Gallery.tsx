@@ -292,7 +292,7 @@ const Gallery = () => {
       )}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-accent to-accent-light">
+      {/* <section className="py-20 bg-gradient-to-r from-accent to-accent-light">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-accent-foreground mb-6">
             Be Part of Our Story
@@ -309,7 +309,7 @@ const Gallery = () => {
             </button></Link>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

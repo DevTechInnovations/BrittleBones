@@ -87,7 +87,6 @@ const Events = () => {
   const upcomingEvents = events.filter(event => new Date(event.date) >= currentDate);
   const pastEventsList = events.filter(event => new Date(event.date) < currentDate);
 
-
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "Community Service": return "bg-success/10 text-success border-success/20";
@@ -100,15 +99,15 @@ const Events = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-white">
+      {/* Hero Section - Kept Gradient */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold text-primary-foreground mb-6">Events</h1>
@@ -119,8 +118,11 @@ const Events = () => {
         </div>
       </section>
 
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
+
       {/* Events Content */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="upcoming" className="space-y-8">
             <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
@@ -136,12 +138,12 @@ const Events = () => {
                   {upcomingEvents.filter(event => event.featured).map((event) => {
                     const IconComponent = getCategoryIcon(event.category);
                     return (
-                      <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 border-l-4 border-l-accent">
+                      <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 border-l-4 border-l-accent bg-white">
                         <CardHeader>
                           <div className="flex items-start justify-between">
                             <div className="flex items-start space-x-3">
-                              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <IconComponent className="h-6 w-6 text-accent" />
+                              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <IconComponent className="h-6 w-6 text-yellow-500" />
                               </div>
                               <div>
                                 <CardTitle className="text-xl">{event.title}</CardTitle>
@@ -165,25 +167,7 @@ const Events = () => {
                               <MapPin className="h-4 w-4" />
                               <span>{event.location}</span>
                             </div>
-                            <div className="flex items-center space-x-2 text-muted-foreground">
-                              {/* <Users className="h-4 w-4" />
-                              <span>{event.attendees}/{event.capacity} registered</span> */}
-                            </div>
                           </div>
-                          {/* <div className="w-full bg-muted rounded-full h-2"> */}
-                            {/* <div
-                              className="bg-accent h-2 rounded-full transition-all duration-500"
-                              style={{ width: `${(event.attendees / event.capacity) * 100}%` }}
-                            />
-                          </div> */}
-                          {/* <Button
-                            className="w-full"
-                            variant={registeredEvents.has(event.id) ? "outline" : "default"}
-                            onClick={() => handleRSVP(event.id, event.title)}
-                            disabled={registeredEvents.has(event.id)}
-                          >
-                            {registeredEvents.has(event.id) ? "Registered ✓" : "Register Now"}
-                          </Button> */}
                         </CardContent>
                       </Card>
                     );
@@ -198,11 +182,11 @@ const Events = () => {
                   {upcomingEvents.map((event) => {
                     const IconComponent = getCategoryIcon(event.category);
                     return (
-                      <Card key={event.id} className="hover:shadow-lg transition-all duration-300 h-full">
+                      <Card key={event.id} className="hover:shadow-lg transition-all duration-300 h-full bg-white">
                         <CardHeader>
                           <div className="flex items-start justify-between mb-2">
-                            <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                              <IconComponent className="h-5 w-5 text-primary" />
+                            <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <IconComponent className="h-5 w-5 text-yellow-500" />
                             </div>
                             <Badge className={getCategoryColor(event.category)} variant="outline">
                               {event.category}
@@ -221,20 +205,7 @@ const Events = () => {
                               <Clock className="h-4 w-4" />
                               <span>{event.time}</span>
                             </div>
-                            <div className="flex items-center space-x-2 text-muted-foreground">
-                              {/* <Users className="h-4 w-4" />
-                              <span>{event.attendees}/{event.capacity}</span> */}
-                            </div>
                           </div>
-                          {/* <Button
-                            className="w-full"
-                            variant={registeredEvents.has(event.id) ? "outline" : "outline"}
-                            size="sm"
-                            onClick={() => handleRSVP(event.id, event.title)}
-                            disabled={registeredEvents.has(event.id)}
-                          >
-                            {registeredEvents.has(event.id) ? "Registered ✓" : "Register"}
-                          </Button> */}
                         </CardContent>
                       </Card>
                     );
@@ -247,7 +218,7 @@ const Events = () => {
               <div>
                 <h2 className="text-3xl font-bold text-foreground mb-8">Past Event Highlights</h2>
                 {pastEventsList.length === 0 ? (
-                  <Card>
+                  <Card className="bg-white">
                     <CardContent className="text-center py-12">
                       <Camera className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                       <h3 className="text-xl font-semibold text-muted-foreground mb-2">No Past Events Yet</h3>
@@ -261,11 +232,11 @@ const Events = () => {
                     {pastEventsList.map((event) => {
                       const IconComponent = getCategoryIcon(event.category);
                       return (
-                        <Card key={event.id} className="hover:shadow-lg transition-all duration-300">
+                        <Card key={event.id} className="hover:shadow-lg transition-all duration-300 bg-white">
                           <CardHeader>
                             <div className="flex items-start space-x-3">
-                              <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
-                                <IconComponent className="h-6 w-6 text-muted-foreground" />
+                              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <IconComponent className="h-6 w-6 text-yellow-500" />
                               </div>
                               <div className="flex-1">
                                 <CardTitle>{event.title}</CardTitle>
@@ -276,10 +247,6 @@ const Events = () => {
                           </CardHeader>
                           <CardContent>
                             <div className="flex justify-between items-center text-sm">
-                              <div className="flex items-center space-x-2 text-muted-foreground">
-                                {/* <Users className="h-4 w-4" /> */}
-                                {/* <span>{event.attendees} registered</span> */}
-                              </div>
                               <Badge variant="outline" className="bg-success/10 text-success">
                                 {event.category}
                               </Badge>
@@ -296,22 +263,25 @@ const Events = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-accent to-accent-light">
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
+
+      {/* CTA Section - Kept Gradient */}
+      <section className="py-20 bg-gradient-to-r from-primary to-primary-light">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-accent-foreground mb-6">
+          <h2 className="text-4xl font-bold text-primary-foreground mb-6">
             Don't Miss Out!
           </h2>
-          <p className="text-xl text-accent-foreground/90 mb-8">
+          <p className="text-xl text-primary-foreground/90 mb-8">
             Stay updated on all our upcoming events and be the first to register.
             Follow us on social media or contact us to get added to our event mailing list.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-accent">
-              <Calendar className="mr-2 h-5 w-5" />
-              Subscribe to Updates
-            </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-accent">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <Button size="lg" className="bg-yellow-400 text-black hover:bg-yellow-500 border-yellow-400">
+        <Calendar className="mr-2 h-5 w-5" />
+        Subscribe to Updates
+      </Button>
+            <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary">
               <ExternalLink className="mr-2 h-5 w-5" />
               Follow Us
             </Button>

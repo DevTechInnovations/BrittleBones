@@ -102,18 +102,9 @@ const GetInvolved = () => {
     }
   ];
 
-  const membershipBenefits = [
-    "Quarterly newsletter with impact updates",
-    "Exclusive member-only volunteer events", 
-    "Annual appreciation dinner and recognition",
-    "Tax-deductible membership fee",
-    "Voting rights in annual board elections",
-    "Access to member resource library"
-  ];
-
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-white">
+      {/* Hero Section - Kept Gradient */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold text-primary-foreground mb-6">Get Involved</h1>
@@ -129,8 +120,11 @@ const GetInvolved = () => {
         </div>
       </section>
 
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
+
       {/* Volunteer Opportunities */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">Volunteer Opportunities</h2>
@@ -142,11 +136,11 @@ const GetInvolved = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {volunteerOpportunities.map((opportunity, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all duration-300 h-full">
+              <Card key={index} className="hover:shadow-lg transition-all duration-300 h-full bg-white">
                 <CardHeader>
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <opportunity.icon className="h-6 w-6 text-primary" />
+                    <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <opportunity.icon className="h-6 w-6 text-yellow-500" />
                     </div>
                     <Badge variant="secondary">{opportunity.badge}</Badge>
                   </div>
@@ -169,7 +163,7 @@ const GetInvolved = () => {
                     </div>
                   </div>
                   <Button className="w-full" variant="outline">
-                      <Link to="/volunteer">Learn More</Link>
+                    <Link to="/volunteer">Learn More</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -177,69 +171,75 @@ const GetInvolved = () => {
           </div>
         </div>
       </section>
+
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
 
       {/* Ways to Support */}
-      <section className="py-20 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Other Ways to Support</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Can't volunteer regularly? There are still many meaningful ways to support our mission 
-              and make a positive impact in the community.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {supportWays.map((way, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all duration-300">
-                <CardHeader>
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <way.icon className="h-6 w-6 text-accent" />
-                    </div>
-                    <div className="flex-1">
-                      <CardTitle>{way.title}</CardTitle>
-                      <CardDescription className="mt-2">{way.description}</CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" className="w-full">
-                    {way.action} <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+     <section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold text-foreground mb-4">Other Ways to Support</h2>
+      <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        Can't volunteer regularly? There are still many meaningful ways to support our mission 
+        and make a positive impact in the community.
+      </p>
+    </div>
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {supportWays.map((way, index) => (
+        <Card key={index} className="hover:shadow-lg transition-all duration-300 bg-white">
+          <CardHeader>
+            <div className="flex items-start space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <way.icon className="h-6 w-6 text-blue-500" />
+              </div>
+              <div className="flex-1">
+                <CardTitle>{way.title}</CardTitle>
+                <CardDescription className="mt-2">{way.description}</CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <Button variant="outline" className="w-full hover:bg-blue-500 hover:text-white transition-colors">
+              {way.action} <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-success to-primary">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-primary-foreground mb-6">
-            Ready to Make a Difference?
-          </h2>
-          <p className="text-xl text-primary-foreground/90 mb-8">
-            Every contribution, whether time, skills, or resources, helps us create lasting positive change. 
-            Join us today and be part of something bigger.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="cta" asChild>
-              <Link to="/contact">
-                <HandHeart className="mr-2 h-5 w-5" />
-                Start Volunteering
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary">
-              <Link to="/donate">
-                <Heart className="mr-2 h-5 w-5" />
-                Make a Donation
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
+
+      {/* CTA Section - Kept Gradient */}
+    <section className="py-20 bg-gradient-to-r from-primary to-primary-light">
+  <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+    <h2 className="text-4xl font-bold text-primary-foreground mb-6">
+      Ready to Make a Difference?
+    </h2>
+    <p className="text-xl text-primary-foreground/90 mb-8">
+      Every contribution, whether time, skills, or resources, helps us create lasting positive change. 
+      Join us today and be part of something bigger.
+    </p>
+    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <Button size="lg" variant="cta" asChild>
+        <Link to="/contact">
+          <HandHeart className="mr-2 h-5 w-5" />
+          Start Volunteering
+        </Link>
+      </Button>
+      <Button size="lg" variant="outline" asChild className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary">
+        <Link to="/donate">
+          <Heart className="mr-2 h-5 w-5" />
+          Make a Donation
+        </Link>
+      </Button>
+    </div>
+  </div>
+</section>
     </div>
   );
 };

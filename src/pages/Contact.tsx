@@ -17,42 +17,32 @@ const Contact = () => {
     message: ""
   });
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   // Here you would typically send the form data to your backend
-  //   toast({
-  //     title: "Message Sent!",
-  //     description: "Thank you for reaching out. We'll get back to you within 24 hours.",
-  //   });
-  //   setFormData({ name: "", email: "", subject: "", message: "" });
-  // };
-
-
-
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true); // <-- start loading
-  try {
-   const response = await fetch("http://localhost:5000/send-Form-email", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(formData),
-});
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:5000/send-Form-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    const data = await response.json();
-    
-    if (data.success) {
-      toast({ title: "Message Sent!", description: data.message });
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } else {
-      toast({ title: "Error", description: data.message, variant: "destructive" });
+      const data = await response.json();
+      
+      if (data.success) {
+        toast({ title: "Message Sent!", description: data.message });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        toast({ title: "Error", description: data.message, variant: "destructive" });
+      }
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Error", description: "Something went wrong.", variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error(err);
-    toast({ title: "Error", description: "Something went wrong.", variant: "destructive" });
-  }
-};
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -60,8 +50,8 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-white">
+      {/* Hero Section - Kept Gradient */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold text-primary-foreground mb-6">Contact Us</h1>
@@ -71,16 +61,19 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
+
       {/* Contact Content */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-6">Send Us a Message</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-6">Send Us A Message</h2>
               <Card>
                 <CardHeader>
-                  <CardTitle>Get in Touch</CardTitle>
+                  <CardTitle>Get In Touch</CardTitle>
                   <CardDescription>
                     Have a question, suggestion, or want to learn more about our programs? 
                     We're here to help and would love to hear from you.
@@ -136,10 +129,10 @@ const Contact = () => {
                         required
                       />
                     </div>
-    <Button type="submit" className="w-full" size="lg" disabled={loading}>
-  <Send className="mr-2 h-4 w-4" />
-  {loading ? "Sending..." : "Send Message"}
-</Button>
+                    <Button type="submit" className="w-full" size="lg" disabled={loading}>
+                      <Send className="mr-2 h-4 w-4" />
+                      {loading ? "Sending..." : "Send Message"}
+                    </Button>
                   </form>
                 </CardContent>
               </Card>
@@ -219,53 +212,54 @@ const Contact = () => {
 
               {/* Social Links */}
               <Card>
-  <CardHeader>
-    <CardTitle>Follow Us</CardTitle>
-    <CardDescription>
-      Stay connected and get updates on our latest initiatives and events.
-    </CardDescription>
-  </CardHeader>
-  <CardContent>
-    <div className="flex space-x-4">
-      <a
-        href="https://www.facebook.com/brittlebonessa"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Button variant="outline" size="icon" className="hover:text-primary">
-          <Facebook className="h-5 w-5" />
-        </Button>
-      </a>
-      <a
-        href="https://www.instagram.com/brittlebonessa2017"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Button variant="outline" size="icon" className="hover:text-primary">
-          <Instagram className="h-5 w-5" />
-        </Button>
-      </a>
-     <a
-href="https://www.tiktok.com/@brittle.bones.sa"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <Button variant="outline" size="icon" className="hover:text-primary">
-    <SiTiktok className="h-5 w-5" />
-  </Button>
-</a>
-    </div>
-  </CardContent>
-</Card>
-
+                <CardHeader>
+                  <CardTitle>Follow Us</CardTitle>
+                  <CardDescription>
+                    Stay connected and get updates on our latest initiatives and events.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex space-x-4">
+                    <a
+                      href="https://www.facebook.com/brittlebonessa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button variant="outline" size="icon" className="hover:text-primary">
+                        <Facebook className="h-5 w-5" />
+                      </Button>
+                    </a>
+                    <a
+                      href="https://www.instagram.com/brittlebonessa2017"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button variant="outline" size="icon" className="hover:text-primary">
+                        <Instagram className="h-5 w-5" />
+                      </Button>
+                    </a>
+                    <a
+                      href="https://www.tiktok.com/@brittle.bones.sa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button variant="outline" size="icon" className="hover:text-primary">
+                        <SiTiktok className="h-5 w-5" />
+                      </Button>
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
-        
       </section>
 
+      {/* Blue Divider Line */}
+      <div className="w-full h-px bg-blue-300"></div>
+
       {/* Map Section Placeholder */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Find Us</h2>
