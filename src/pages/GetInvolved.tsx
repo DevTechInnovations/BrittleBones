@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
+
 const GetInvolved = () => {
   const volunteerOpportunities = [
     {
@@ -26,7 +27,8 @@ const GetInvolved = () => {
       time: "4-6 hours/week",
       location: "Main Office",
       skills: "No experience required",
-      badge: "High Impact"
+      badge: "High Impact",
+      link: "/Volunteer"
     },
     {
       icon: GraduationCap,
@@ -35,7 +37,8 @@ const GetInvolved = () => {
       time: "2-4 hours/week",
       location: "Community Centers",
       skills: "High school education",
-      badge: "Ongoing"
+      badge: "Ongoing",
+      link: "/Volunteer"
     },
     {
       icon: Home,
@@ -44,7 +47,8 @@ const GetInvolved = () => {
       time: "8 hours/month",
       location: "Various Locations",
       skills: "Basic handyman skills",
-      badge: "Flexible"
+      badge: "Flexible",
+      link: "/Volunteer"
     },
     {
       icon: Heart,
@@ -53,7 +57,8 @@ const GetInvolved = () => {
       time: "6-8 hours/week", 
       location: "Field Work",
       skills: "Communication skills",
-      badge: "People-Focused"
+      badge: "People-Focused",
+      link: "/Volunteer"
     },
     {
       icon: Briefcase,
@@ -62,7 +67,8 @@ const GetInvolved = () => {
       time: "4-6 hours/week",
       location: "Main Office",
       skills: "Computer literacy",
-      badge: "Behind-the-Scenes"
+      badge: "Behind-the-Scenes",
+      link: "/Volunteer"
     },
     {
       icon: Calendar,
@@ -71,36 +77,41 @@ const GetInvolved = () => {
       time: "8-12 hours/month",
       location: "Various Venues",
       skills: "Organization skills",
-      badge: "Creative"
+      badge: "Creative",
+      link: "/Volunteer"
     }
   ];
 
   const supportWays = [
-    {
-      icon: Heart,
-      title: "Monthly Donations",
-      description: "Provide consistent support with recurring monthly contributions that help us plan and sustain our programs.",
-      action: "Set Up Monthly Giving"
-    },
-    {
-      icon: ShoppingBag,
-      title: "Item Donations",
-      description: "Donate clothes, food, household items, or school supplies that directly benefit community members.",
-      action: "View Wish List"
-    },
-    {
-      icon: Users,
-      title: "Corporate Partnership",
-      description: "Partner with us through corporate sponsorships, employee volunteer programs, or matching gifts.",
-      action: "Explore Partnerships"
-    },
-    {
-      icon: HandHeart,
-      title: "Skills-Based Volunteering",
-      description: "Use your professional skills in marketing, legal, accounting, or technology to support our mission.",
-      action: "Share Your Skills"
-    }
-  ];
+  {
+    icon: Heart,
+    title: "Monthly Donations",
+    description: "Provide consistent support with recurring monthly contributions that help us plan and sustain our programs.",
+    action: "Set Up Monthly Giving",
+    link: "/donate"
+  },
+  {
+    icon: ShoppingBag,
+    title: "Item Donations",
+    description: "Donate clothes, food, household items, or school supplies that directly benefit community members.",
+    action: "Donate Items",
+    link: "/item-donation"
+  },
+  {
+    icon: Users,
+    title: "Corporate Partnership",
+    description: "Partner with us through corporate sponsorships, employee volunteer programs, or matching gifts.",
+    action: "Explore Partnerships",
+    link: "/partnerships"
+  },
+  {
+    icon: HandHeart,
+    title: "Skills-Based Volunteering",
+    description: "Use your professional skills in marketing, legal, accounting, or technology to support our mission.",
+    action: "Share Your Skills",
+    link: "/Volunteer"
+  }
+];
 
   return (
     <div className="min-h-screen bg-white">
@@ -162,9 +173,13 @@ const GetInvolved = () => {
                       <span>{opportunity.skills}</span>
                     </div>
                   </div>
-                  <Button className="w-full" variant="outline">
-                    <Link to="/volunteer">Learn More</Link>
-                  </Button>
+                 
+            {/* Use the link from the object */}
+            <Button asChild className="w-full" variant="outline">
+              <Link to={opportunity.link}>
+                Learn More
+              </Link>
+            </Button>
                 </CardContent>
               </Card>
             ))}
@@ -200,11 +215,18 @@ const GetInvolved = () => {
               </div>
             </div>
           </CardHeader>
-          <CardContent>
-            <Button variant="outline" className="w-full hover:bg-blue-500 hover:text-white transition-colors">
-              {way.action} <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </CardContent>
+<CardContent>
+  <Button 
+    asChild 
+    variant="outline" 
+    className="w-full hover:bg-blue-500 hover:text-white transition-colors"
+  >
+    <Link to={way.link}>
+      {way.action} <ArrowRight className="ml-2 h-4 w-4" />
+    </Link>
+  </Button>
+</CardContent>
+
         </Card>
       ))}
     </div>

@@ -15,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Heart, Shield, Smartphone, CreditCard, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import Donation from "@/components/ItemDonationPage";
 
 const Donate = () => {
   const { toast } = useToast();
@@ -382,6 +383,7 @@ const Donate = () => {
               </CardContent>
             </Card>
 
+
             {/* Impact Stats */}
             <Card className="shadow-lg border-0 bg-gradient-to-br from-primary/5 to-primary/10">
               <CardHeader className="pb-4">
@@ -454,12 +456,22 @@ const Donate = () => {
                 </div>
               </CardContent>
             </Card>
+
+            
           </div>
         </div>
       </div>
+      
+  {/* <div className="mt-20">
+  <Donation/>
+    </div> */}
     </div>
+
+    
   );
 };
+
+
 
 export default Donate;
 

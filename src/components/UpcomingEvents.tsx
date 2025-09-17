@@ -92,10 +92,10 @@ const UpcomingEvents = () => {
               <span>{event.time}</span>
             </div>
             <div className="flex items-center space-x-2 text-muted-foreground mb-4">
-              <Users className="h-4 w-4" />
+              {/* <Users className="h-4 w-4" />
               <span>
                 {event.attendees}/{event.capacity} registered
-              </span>
+              </span> */}
             </div>
             <Button asChild variant="outline" className="w-full">
               <Link to="/events">
