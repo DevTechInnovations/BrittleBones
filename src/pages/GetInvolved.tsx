@@ -102,7 +102,7 @@ const GetInvolved = () => {
     title: "Corporate Partnership",
     description: "Partner with us through corporate sponsorships, employee volunteer programs, or matching gifts.",
     action: "Explore Partnerships",
-    link: "/partnerships"
+    link: "/contact"
   },
   {
     icon: HandHeart,

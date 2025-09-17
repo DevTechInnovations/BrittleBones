@@ -135,6 +135,77 @@ app.post("/volunteer-signup", async (req, res) => {
   }
 });
 
+app.post("/item-donation", async (req, res) => {
+  const { name, email, contact, itemType, description, deliveryMode, deliveryTime } = req.body;
+
+  if (!name || !email || !contact || !itemType || !description) {
+    return res.status(400).json({ success: false, message: "All fields are required." });
+  }
+
+  // Only require delivery info for certain donation types
+  const deliveryRequiredTypes = ["medical", "educational", "care"];
+  if (deliveryRequiredTypes.includes(itemType)) {
+    if (!deliveryMode || !deliveryTime) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Delivery mode and time are required for this type of donation." 
+      });
+    }
+  }
+
+  try {
+    // Setup transporter
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_ADMIN_HOST,
+      port: Number(process.env.SMTP_ADMIN_PORT) || 587,
+      secure: process.env.SMTP_ADMIN_PORT == 465,
+      auth: {
+        user: process.env.SMTP_ADMIN_USER,
+        pass: process.env.SMTP_ADMIN_PASS,
+      },
+      tls: { rejectUnauthorized: false },
+    });
+
+    // Email to admin
+    await transporter.sendMail({
+      from: `"Item Donation" <${process.env.SMTP_ADMIN_USER}>`,
+      to: process.env.ADMIN_RECEIVER_EMAIL,
+      subject: `New Item Donation from ${name}`,
+      html: `
+        <h2>New Item Donation Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Contact:</strong> ${contact}</p>
+        <p><strong>Donation Type:</strong> ${itemType}</p>
+        ${deliveryRequiredTypes.includes(itemType) ? `<p><strong>Delivery Mode:</strong> ${deliveryMode}</p>
+        <p><strong>Preferred Delivery Time:</strong> ${deliveryTime}</p>` : ''}
+        <p><strong>Description:</strong> ${description}</p>
+      `,
+    });
+
+    // Confirmation email to volunteer
+    await transporter.sendMail({
+      from: `"Brittle Bones" <${process.env.SMTP_ADMIN_USER}>`,
+      to: email,
+      subject: "Volunteer Signup Confirmation",
+      html: `
+        <h2>Hi ${name},</h2>
+        <p>Thank you for your donation of <b>${itemType}</b>.</p>
+        <p>We’ve received your donation request and will contact you soon.</p>
+        <p>Best regards,<br/>Brittle Bones SA Team</p>
+        <a href="https://brittlebones-sa.org.za/"><img src="https://iili.io/KID11bj.png" alt="Brittle Bones Logo" /></a>
+      `,
+    });
+
+    res.json({ success: true, message: "Donation email sent." });
+  } catch (error) {
+    console.error("Email error:", error);
+    res.status(500).json({ success: false, message: "Failed to send email." });
+  }
+});
+
+
+
 // PAYFAST ROUTE
 const PAYFAST_URL = "https://www.payfast.co.za/eng/process";
 
