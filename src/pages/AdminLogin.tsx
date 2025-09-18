@@ -167,25 +167,32 @@ const AdminLogin = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 to-accent/5 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-100 flex items-center justify-center p-4">
+
+              <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-to-r from-primary to-primary-light rounded-full flex items-center justify-center">
-              <Shield className="h-8 w-8 text-primary-foreground" />
+            <div className="h-30 2-auto  from-primary to-primary-light rounded-full flex items-center justify-center">
+              
+              <img
+                src="/DEVTECH INNOVATIONS-logos_white-1.png"
+                alt="Devtech Innovations Logo"
+                
+              />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-foreground">Admin Portal</h1>
-          <p className="text-muted-foreground mt-2">
+          <h1 className="text-3xl font-bold text-white">Admin Portal</h1>
+          <p className="text-white mt-2">
             Access your administrative dashboard
           </p>
         </div>
 
-        <Card className="w-full">
+        <Card className="w-full bg-transparent border border-white/20 shadow-lg">
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login">Sign In</TabsTrigger>
-              <TabsTrigger value="signup">Create Admin</TabsTrigger>
+              <TabsTrigger value="login" className="text-black">Sign In</TabsTrigger>
+      <TabsTrigger value="signup" className="text-black">Create Admin</TabsTrigger>
             </TabsList>
 
             <TabsContent value="login">
@@ -332,7 +339,7 @@ const AdminLogin = () => {
         </Card>
 
         <div className="text-center mt-6">
-          <Button variant="ghost" onClick={() => navigate("/")} className="text-muted-foreground">
+          <Button variant="ghost" onClick={() => navigate("/")} className="text-white">
             ← Back to Website
           </Button>
         </div>

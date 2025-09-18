@@ -343,26 +343,46 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      
+    
       {/* Header */}
-      <div className="bg-gradient-to-r from-primary to-primary-light py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-4xl font-bold text-primary-foreground flex items-center">
-                <Shield className="mr-3 h-8 w-8" />
-                Admin Dashboard
-              </h1>
-              <p className="text-primary-foreground/90 mt-2">
-                Welcome back, {user?.email}
-              </p>
-            </div>
-            <Button variant="outline" onClick={handleSignOut} className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary">
-              <LogOut className="mr-2 h-4 w-4" />
-              Sign Out
-            </Button>
-          </div>
+<div className="bg-black from-primary to-primary-light py-8">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-between items-center">
+      
+      {/* Left Section (Logo + Text) */}
+      <div className="flex items-center space-x-6">
+        {/* Logo */}
+        <img
+          src="/DEVTECH INNOVATIONS-logos_white-1.png"
+          alt="Devtech Innovations Logo"
+          className="h-12 w-auto object-contain"
+        />
+
+        {/* Title + User */}
+        <div>
+          <h1 className="text-3xl font-bold text-primary-foreground">
+            Admin Dashboard
+          </h1>
+          <p className="text-primary-foreground/80 mt-1 text-sm">
+            Welcome back, {user?.email}
+          </p>
         </div>
       </div>
+
+      {/* Right Section (Sign Out Button) */}
+      <Button
+        variant="outline"
+        onClick={handleSignOut}
+        className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary"
+      >
+        <LogOut className="mr-2 h-4 w-4" />
+        Sign Out
+      </Button>
+    </div>
+  </div>
+</div>
+
 
       {/* Dashboard Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

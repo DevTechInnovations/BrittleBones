@@ -28,24 +28,27 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/get-involved" element={<GetInvolved />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/donate" element={<Donate />} />
-              <Route path="/admin-login" element={<AdminLogin />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
-              <Route path="/volunteer" element={<VolunteerForm />} />
-              <Route path="/item-donation" element={<Donation />} />
+          <Routes>
+            {/* Public routes wrapped in Layout */}
+            <Route element={<Layout />}>
+              <Route index element={<Home />} />   {/* "/" */}
+              <Route path="about" element={<About />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="get-involved" element={<GetInvolved />} />
+              <Route path="events" element={<Events />} />
+              <Route path="gallery" element={<Gallery />} />
+              <Route path="donate" element={<Donate />} />
+              <Route path="volunteer" element={<VolunteerForm />} />
+              <Route path="item-donation" element={<Donation />} />
+            </Route>
 
-              {/* Catch-all route */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
+            {/* Admin routes (no Layout) */}
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+
+            {/* Catch-all 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
