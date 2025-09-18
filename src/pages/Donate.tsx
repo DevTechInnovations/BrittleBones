@@ -434,22 +434,22 @@ const Donate = () => {
                 <div className="flex items-center justify-start gap-4 mt-3">
                   {/* Example placeholders - replace with your actual images later */}
                   <img
-                    src="/src/assets/Payfast logo.svg"
+                    src="Payfast logo.svg"
                     alt="PayFast"
                     className="h-7 w-auto"
                   />
                   <img
-                    src="src/assets/snapscanlogo.png"
+                    src="snapscanlogo.png"
                     alt="SnapScan"
                     className="h-12"
                   />
                   <img
-                    src="src/assets/visa3.png"
+                    src="visa3.png"
                     alt="Visa"
                     className="h-12"
                   />
                   <img
-                    src="src/assets/mastercard.png"
+                    src="mastercard.png"
                     alt="MasterCard"
                     className="h-6"
                   />
