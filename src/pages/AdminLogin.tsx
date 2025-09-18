@@ -191,8 +191,8 @@ const AdminLogin = () => {
         <Card className="w-full bg-transparent border border-white/20 shadow-lg">
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login" className="text-white data-[state=active]:text-black">Sign In</TabsTrigger>
-              <TabsTrigger value="signup" className="text-white data-[state=active]:text-black">Create Admin</TabsTrigger>
+              <TabsTrigger value="login" className="text-black">Sign In</TabsTrigger>
+              <TabsTrigger value="signup" className="text-black">Create Admin</TabsTrigger>
             </TabsList>
 
             <TabsContent value="login">
