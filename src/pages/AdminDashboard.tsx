@@ -342,7 +342,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen  bg-gradient-to-br from-black via-gray-900 to-gray-100">
       
     
       {/* Header */}
@@ -395,10 +395,10 @@ const AdminDashboard = () => {
 
           <TabsContent value="events" className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-3xl font-bold">Manage Events</h2>
+              <h2 className="text-3xl text-white font-bold">Manage Events</h2>
               <Dialog open={showEventDialog} onOpenChange={setShowEventDialog}>
                 <DialogTrigger asChild>
-                  <Button onClick={() => setSelectedEvent(null)}>
+                  <Button className="bg-black hover:bg-black"  onClick={() => setSelectedEvent(null)}>
                     <Plus className="mr-2 h-4 w-4" />
                     Add Event
                   </Button>
@@ -475,7 +475,7 @@ const AdminDashboard = () => {
 
           <TabsContent value="photos" className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-3xl font-bold">Manage Photos</h2>
+              <h2 className="text-3xl text-white font-bold">Manage Photos</h2>
               <Dialog open={showPhotoDialog} onOpenChange={setShowPhotoDialog}>
                 <DialogTrigger asChild>
                   <Button>
