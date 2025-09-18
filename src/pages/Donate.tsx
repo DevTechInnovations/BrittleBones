@@ -16,6 +16,7 @@ import { Separator } from "@/components/ui/separator";
 import { Heart, Shield, Smartphone, CreditCard, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Donation from "@/components/ItemDonationPage";
+import { Helmet } from "react-helmet-async"; 
 
 const Donate = () => {
   const { toast } = useToast();
@@ -93,6 +94,21 @@ const Donate = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/20">
+ {/* SEO Helmet */}
+      <Helmet>
+        <title>Donate | Brittle Bones SA</title>
+        <meta
+          name="description"
+          content="Support Brittle Bones SA with a secure online donation via PayFast or SnapScan. Your contribution helps us provide medical aid, education, and family support."
+        />
+        <meta property="og:title" content="Donate to Brittle Bones SA" />
+        <meta
+          property="og:description"
+          content="Make a difference today by donating to Brittle Bones SA. Choose PayFast, SnapScan, or EFT to support families in need."
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       {/* Hero Section */}
       <section className="relative bg-primary py-20 text-center text-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"></div>

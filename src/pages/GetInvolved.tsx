@@ -16,7 +16,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { Helmet } from "react-helmet-async";
 
 const GetInvolved = () => {
   const volunteerOpportunities = [
@@ -115,6 +115,71 @@ const GetInvolved = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* ✅ SEO META TAGS */}
+      <Helmet>
+        <title>Get Involved | Volunteer & Support Brittle Bones South Africa</title>
+        <meta
+          name="description"
+          content="Get involved with Brittle Bones South Africa in Pinelands, Cape Town. Explore volunteer opportunities, donations, partnerships, and ways to support children with Osteogenesis Imperfecta."
+        />
+        <meta
+          name="keywords"
+          content="Volunteer Pinelands Cape Town, Brittle Bones South Africa, NPO volunteer opportunities, Osteogenesis Imperfecta support, charity Cape Town, donate, community outreach"
+        />
+        <meta name="author" content="Brittle Bones South Africa" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Get Involved | Volunteer & Support Brittle Bones SA" />
+        <meta
+          property="og:description"
+          content="Join Brittle Bones South Africa as a volunteer or supporter in Pinelands, Cape Town. Together we support children with Osteogenesis Imperfecta."
+        />
+        <meta property="og:image" content="https://www.brittlebones.org.za/images/get-involved.jpg" />
+        <meta property="og:url" content="https://www.brittlebones.org.za/get-involved" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Get Involved | Volunteer & Support Brittle Bones SA" />
+        <meta
+          name="twitter:description"
+          content="Discover ways to volunteer and support Brittle Bones South Africa, a Pinelands-based NPO in Cape Town."
+        />
+        <meta name="twitter:image" content="https://www.brittlebones.org.za/images/get-involved.jpg" />
+
+        {/* Volunteer Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NGO",
+            name: "Brittle Bones South Africa",
+            url: "https://www.brittlebones.org.za/get-involved",
+            logo: "https://www.brittlebones.org.za/images/logo.png",
+            description:
+              "Brittle Bones South Africa is an NPO based in Pinelands, Cape Town, offering volunteer opportunities and support programs for families affected by Osteogenesis Imperfecta.",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Pinelands",
+              addressRegion: "Cape Town",
+              postalCode: "7405",
+              addressCountry: "South Africa",
+            },
+            volunteerOpportunity: volunteerOpportunities.map((opportunity) => ({
+              "@type": "VolunteerOpportunity",
+              name: opportunity.title,
+              description: opportunity.description,
+              skills: opportunity.skills,
+              location: {
+                "@type": "Place",
+                name: opportunity.location,
+              },
+              timeCommitment: opportunity.time,
+              url: `https://www.brittlebones.org.za${opportunity.link}`,
+            })),
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero Section - Kept Gradient */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Helmet } from "react-helmet-async";
 
 interface Event {
   id: string;
@@ -107,6 +108,76 @@ const Events = () => {
 
   return (
     <div className="min-h-screen bg-white">
+       {/*SEO Meta & Schema */}
+      <Helmet>
+        <title>Events | Brittle Bones South Africa</title>
+        <meta
+          name="description"
+          content="Discover upcoming and past events by Brittle Bones South Africa in Pinelands, Cape Town. Join us for community service, fundraising, training, and awareness events."
+        />
+        <meta
+          name="keywords"
+          content="Events in Pinelands Cape Town, volunteer events Cape Town, Brittle Bones South Africa, fundraising Cape Town, NPO events, community events"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Events | Brittle Bones South Africa" />
+        <meta
+          property="og:description"
+          content="Join Brittle Bones South Africa at our community events in Cape Town. Volunteer, donate, and support children with Osteogenesis Imperfecta."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.brittlebones.org.za/events" />
+        <meta property="og:image" content="https://www.brittlebones.org.za/images/events-cover.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Events | Brittle Bones South Africa" />
+        <meta
+          name="twitter:description"
+          content="Stay updated on upcoming volunteer and fundraising events in Cape Town with Brittle Bones South Africa."
+        />
+        <meta name="twitter:image" content="https://www.brittlebones.org.za/images/events-cover.jpg" />
+
+        {/* Event Schema.org JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "EventSeries",
+            name: "Brittle Bones South Africa Events",
+            description:
+              "A series of community service, fundraising, and awareness events hosted by Brittle Bones South Africa in Pinelands, Cape Town.",
+            organizer: {
+              "@type": "NGO",
+              name: "Brittle Bones South Africa",
+              url: "https://www.brittlebones.org.za",
+            },
+            eventSchedule: upcomingEvents.map((event) => ({
+              "@type": "Event",
+              name: event.title,
+              description: event.description,
+              startDate: `${event.date}T${event.time}`,
+              eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+              eventStatus: "https://schema.org/EventScheduled",
+              location: {
+                "@type": "Place",
+                name: event.location,
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Pinelands",
+                  addressRegion: "Cape Town",
+                  addressCountry: "South Africa",
+                },
+              },
+              organizer: {
+                "@type": "NGO",
+                name: "Brittle Bones South Africa",
+              },
+            })),
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero Section - Kept Gradient */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

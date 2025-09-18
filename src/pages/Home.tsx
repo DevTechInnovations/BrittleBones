@@ -4,10 +4,74 @@ import { Heart, Users, Calendar, Handshake, ArrowRight, Target, Shield } from "l
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/IMG_2159.jpeg";
 import UpcomingEvents from "@/components/UpcomingEvents";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-white">
+      {/* SEO META TAGS */}
+      <Helmet>
+        <title>Brittle Bones South Africa | NPO in Pinelands, Cape Town</title>
+        <meta
+          name="description"
+          content="Brittle Bones South Africa is a non-profit organization based in Pinelands, Cape Town, supporting children with Osteogenesis Imperfecta through awareness, community, and care."
+        />
+        <meta
+          name="keywords"
+          content="Brittle Bones South Africa, Osteogenesis Imperfecta, OI support, NPO Cape Town, Pinelands charity, child health awareness, community support South Africa"
+        />
+        <meta name="author" content="Brittle Bones South Africa" />
+
+        {/* Open Graph (Facebook & WhatsApp) */}
+        <meta property="og:title" content="Brittle Bones South Africa | Pinelands, Cape Town" />
+        <meta
+          property="og:description"
+          content="Join Brittle Bones South Africa, an NPO in Cape Town, creating awareness and support for children with Osteogenesis Imperfecta."
+        />
+        <meta property="og:image" content={heroImage} />
+        <meta property="og:url" content="https://www.brittlebones.org.za" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Brittle Bones South Africa | Pinelands, Cape Town" />
+        <meta
+          name="twitter:description"
+          content="Supporting families and raising awareness for Osteogenesis Imperfecta in Cape Town."
+        />
+        <meta name="twitter:image" content={heroImage} />
+
+        {/* Local SEO - Organization Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NGO",
+            name: "Brittle Bones South Africa",
+            alternateName: "OI Support South Africa",
+            url: "https://www.brittlebones.org.za",
+            logo: heroImage,
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "Customer Support",
+              email: "info@brittlebones.org.za",
+            },
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Pinelands",
+              addressLocality: "Cape Town",
+              addressRegion: "Western Cape",
+              postalCode: "7405",
+              addressCountry: "South Africa",
+            },
+            sameAs: [
+              "https://www.facebook.com/brittlebonesSA",
+              "https://twitter.com/brittlebonesSA",
+              "https://instagram.com/brittlebonesSA",
+            ],
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white">
         <div 

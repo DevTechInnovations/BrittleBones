@@ -4,6 +4,7 @@ import { Award, Users, Heart, Target, Calendar, Megaphone } from "lucide-react";
 import storyImg from "@/assets/IMG_2159.jpeg";
 import missionImg from "@/assets/IMG_2159.jpeg";
 import visionImg from "@/assets/IMG_2159.jpeg";
+import { Helmet } from "react-helmet-async"; 
 
 const About = () => {
   const teamMembers = [
@@ -56,6 +57,66 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-white">
+
+       {/*SEO META TAGS */}
+      <Helmet>
+        <title>About Us | Brittle Bones South Africa - NPO in Pinelands, Cape Town</title>
+        <meta
+          name="description"
+          content="Learn more about Brittle Bones South Africa, a non-profit organization in Pinelands, Cape Town, supporting children with Osteogenesis Imperfecta through awareness, community, and care."
+        />
+        <meta
+          name="keywords"
+          content="Brittle Bones South Africa, About Brittle Bones SA, Osteogenesis Imperfecta support, NPO Cape Town, Pinelands charity, rare bone disease awareness"
+        />
+        <meta name="author" content="Brittle Bones South Africa" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="About Brittle Bones South Africa | Cape Town NPO" />
+        <meta
+          property="og:description"
+          content="Discover the story, mission, and team behind Brittle Bones South Africa, an NPO based in Pinelands, Cape Town."
+        />
+        <meta property="og:image" content={storyImg} />
+        <meta property="og:url" content="https://www.brittlebones.org.za/about" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Brittle Bones South Africa | Cape Town NPO" />
+        <meta
+          name="twitter:description"
+          content="Meet the passionate team and mission behind Brittle Bones SA, a non-profit in Pinelands, Cape Town."
+        />
+        <meta name="twitter:image" content={storyImg} />
+
+        {/* Local Business / NGO Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NGO",
+            name: "Brittle Bones South Africa",
+            url: "https://www.brittlebones.org.za/about",
+            logo: storyImg,
+            description:
+              "Brittle Bones South Africa is an NPO based in Pinelands, Cape Town, providing awareness, community, and support for children with Osteogenesis Imperfecta.",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Pinelands",
+              addressLocality: "Cape Town",
+              addressRegion: "Western Cape",
+              postalCode: "7405",
+              addressCountry: "South Africa",
+            },
+            sameAs: [
+              "https://www.facebook.com/brittlebonesSA",
+              "https://twitter.com/brittlebonesSA",
+              "https://instagram.com/brittlebonesSA",
+            ],
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero Section - Kept Gradient */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

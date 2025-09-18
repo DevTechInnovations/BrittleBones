@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Clock, Send, Facebook, Twitter, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { SiTiktok } from "react-icons/si";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -51,6 +52,21 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-white">
+        {/* ✅ SEO Helmet */}
+      <Helmet>
+        <title>Contact Us | Brittle Bones SA</title>
+        <meta
+          name="description"
+          content="Get in touch with Brittle Bones SA via email, phone, or social media. We respond to all inquiries within 24 hours."
+        />
+        <meta property="og:title" content="Contact Brittle Bones SA" />
+        <meta
+          property="og:description"
+          content="Reach out to Brittle Bones SA by email, phone, or social media. We're here to connect and support."
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       {/* Hero Section - Kept Gradient */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

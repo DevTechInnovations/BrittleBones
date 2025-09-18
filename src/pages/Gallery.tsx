@@ -6,7 +6,7 @@ import { Camera, Calendar, Eye, Heart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
-
+import { Helmet } from "react-helmet-async";
 
 
 interface Event {
@@ -124,6 +124,21 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-background">
+ {/* SEO Helmet */}
+      <Helmet>
+        <title>Gallery | Brittle Bones SA</title>
+        <meta
+          name="description"
+          content="Explore the Brittle Bones SA photo gallery. Discover moments of joy, fundraising events, training sessions, and community service initiatives captured in photos."
+        />
+        <meta property="og:title" content="Gallery - Brittle Bones SA" />
+        <meta
+          property="og:description"
+          content="Browse captured memories from Brittle Bones SA’s community programs, events, and fundraising activities."
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary to-primary-light py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
