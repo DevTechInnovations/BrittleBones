@@ -191,21 +191,21 @@ const AdminLogin = () => {
         <Card className="w-full bg-transparent border border-white/20 shadow-lg">
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login" className="text-black">Sign In</TabsTrigger>
-      <TabsTrigger value="signup" className="text-black">Create Admin</TabsTrigger>
+              <TabsTrigger value="login" className="text-white data-[state=active]:text-black">Sign In</TabsTrigger>
+              <TabsTrigger value="signup" className="text-white data-[state=active]:text-black">Create Admin</TabsTrigger>
             </TabsList>
 
             <TabsContent value="login">
               <CardHeader>
-                <CardTitle>Sign In</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-white">Sign In</CardTitle>
+                <CardDescription className="text-white/80">
                   Enter your credentials to access the admin dashboard
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="login-email">Email</Label>
+                    <Label htmlFor="login-email" className="text-white">Email</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
@@ -221,7 +221,7 @@ const AdminLogin = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="login-password">Password</Label>
+                    <Label htmlFor="login-password" className="text-white">Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
@@ -259,15 +259,15 @@ const AdminLogin = () => {
 
             <TabsContent value="signup">
               <CardHeader>
-                <CardTitle>Create Admin Account</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-white">Create Admin Account</CardTitle>
+                <CardDescription className="text-white/80">
                   Set up a new administrator account
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSignup} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-email">Email</Label>
+                    <Label htmlFor="signup-email" className="text-white">Email</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
@@ -283,7 +283,7 @@ const AdminLogin = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="signup-password">Password</Label>
+                    <Label htmlFor="signup-password" className="text-white">Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
@@ -307,7 +307,7 @@ const AdminLogin = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="confirm-password">Confirm Password</Label>
+                    <Label htmlFor="confirm-password" className="text-white">Confirm Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
