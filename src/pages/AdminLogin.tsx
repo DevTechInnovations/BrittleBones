@@ -338,7 +338,10 @@ const AdminLogin = () => {
           </Tabs>
         </Card>
 
-        <div className="text-center mt-6">
+        <div className="text-center mt-4">
+          <p className="text-xs text-white/60 mb-4">
+            Warning: Unauthorized access or tampering with this system is strictly prohibited and may result in legal action.
+          </p>
           <Button variant="ghost" onClick={() => navigate("/")} className="text-white">
             ← Back to Website
           </Button>
