@@ -23,7 +23,7 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/send-Form-email", {
+      const response = await fetch("https://back-end.brittlebones-sa.org.za/send-Form-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

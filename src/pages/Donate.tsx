@@ -59,7 +59,7 @@ const Donate = () => {
       window.location.href = `https://pos.snapscan.io/qr/6Cm8s6C8?amount=${amountInCents}`;
     } else {
       try {
-        const res = await fetch("http://localhost:5000/donate", {
+        const res = await fetch("https://back-end.brittlebones-sa.org.za/donate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -450,22 +450,22 @@ const Donate = () => {
                 <div className="flex items-center justify-start gap-4 mt-3">
                   {/* Example placeholders - replace with your actual images later */}
                   <img
-                    src="Payfast logo.svg"
+                    src="src/assets/Payfast logo.svg" 
                     alt="PayFast"
                     className="h-7 w-auto"
                   />
                   <img
-                    src="snapscanlogo.png"
+                    src="src/assets/snapscanlogo.png"
                     alt="SnapScan"
                     className="h-12"
                   />
                   <img
-                    src="visa3.png"
+                    src="src/assets/visa3.png"
                     alt="Visa"
                     className="h-12"
                   />
                   <img
-                    src="mastercard.png"
+                    src="src/assets/mastercard.png"
                     alt="MasterCard"
                     className="h-6"
                   />

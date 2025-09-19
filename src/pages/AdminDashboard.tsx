@@ -478,8 +478,8 @@ const AdminDashboard = () => {
               <h2 className="text-3xl text-white font-bold">Manage Photos</h2>
               <Dialog open={showPhotoDialog} onOpenChange={setShowPhotoDialog}>
                 <DialogTrigger asChild>
-                  <Button>
-                    <Upload className="mr-2 h-4 w-4" />
+                  <Button className="bg-black hover:bg-black">
+                    <Upload className="mr-2 h-4 w-4"  />
                     Upload Photo
                   </Button>
                 </DialogTrigger>

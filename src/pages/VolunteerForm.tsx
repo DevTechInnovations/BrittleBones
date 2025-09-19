@@ -47,7 +47,7 @@ const VolunteerForm = () => {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/volunteer-signup", {
+      const response = await fetch("https://back-end.brittlebones-sa.org.za/volunteer-signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
