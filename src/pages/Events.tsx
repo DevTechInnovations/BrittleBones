@@ -307,12 +307,16 @@ const Events = () => {
             Follow us on social media or contact us to get added to our event mailing list.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-accent">
-              <Calendar className="mr-2 h-5 w-5" />
-              Subscribe to Updates
-            </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-accent">
-              <ExternalLink className="mr-2 h-5 w-5" />
+            <Button
+              size="lg"
+              variant="outline"
+              className="group bg-white/10 border-white/30 text-white 
+                        transition-all duration-300 ease-out
+                        hover:bg-white hover:text-accent hover:border-white/60
+                        hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(255,255,255,0.15)]
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            >
+              <ExternalLink className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               Follow Us
             </Button>
           </div>
